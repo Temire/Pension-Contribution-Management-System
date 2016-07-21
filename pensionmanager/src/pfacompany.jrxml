@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pfacompany" language="groovy" pageWidth="1200" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="1160" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="2d4c6c50-487f-4730-af75-8e4459184403">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="118" splitType="Stretch">
+			<staticText>
+				<reportElement x="290" y="10" width="548" height="38" uuid="e11bd9e6-17c9-4db0-917a-63be5a86f3a4"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRAL SECURITIES CLEARING SYSTEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="54" width="100" height="31" uuid="1760a66e-18e6-4d0e-a485-2684e01d30a4"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PCMS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="54" width="445" height="31" uuid="1d198a9e-6112-44b2-96f2-3958e3a1fb9d"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pension Fund Administrator List]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="85" width="157" height="31" uuid="6b634733-f691-45ad-8214-8278b17cd69b"/>
+				<textElement>
+					<font fontName="Cambria Math" size="14" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="966" y="14" width="113" height="71" uuid="e8298849-0078-40dc-8125-ab0d32746735"/>
+				<imageExpression><![CDATA["C:\\Applications\\pensionmanager\\tomcat\\webapps\\pensionmanager\\WEB-INF\\classes\\logo_cscs.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="39" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

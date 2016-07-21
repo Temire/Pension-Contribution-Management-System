@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="1.0">
+             
+    <!-- Tomcat + Hypersonic -->
+    <persistence-unit name="default">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<non-jta-data-source>java:comp/env/jdbc/pensionmanagerDS</non-jta-data-source>
+    	<class>org.openxava.session.GalleryImage</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.max_fetch_depth" value="1"/>
+        </properties>
+    </persistence-unit>    
+        
+    <!-- JBoss + Hypersonic 
+    <persistence-unit name="default">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<non-jta-data-source>java:/thehospitalmanagerDS</non-jta-data-source>
+    	<class>org.openxava.session.GalleryImage</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+        </properties>
+    </persistence-unit>    
+    -->
+    
+    <!-- WebSphere + AS/400 
+    <persistence-unit name="default">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<non-jta-data-source>jdbc/thehospitalmanagerDS</non-jta-data-source>
+    	<class>org.openxava.session.GalleryImage</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DB2400Dialect"/>
+            <property name="hibernate.show_sql" value="false"/>
+        </properties>
+    </persistence-unit>
+    -->
+    
+    <!-- JUnit Hypersonic -->
+	<persistence-unit name="junit">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>org.openxava.session.GalleryImage</class>
+		<properties>
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.password" value="rashy0207" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/pensionmanager" />
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.current_session_context_class"
+				value="com.autobizlogic.abl.session.LogicThreadLocalSessionContext" />
+		</properties>
+	</persistence-unit>
+  
+    
+    
+</persistence>

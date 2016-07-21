@@ -1,0 +1,25 @@
+#main_navigation {
+	z-index: 999999999;
+	background: #5c280e;
+	padding: 10px;
+	height: 15px; 	
+	box-shadow: 0px 0px 7px #000; 
+	-moz-box-shadow: 0px 0px 7px #000; 
+	-webkit-box-shadow: 0px 0px 7px #000;	
+}
+
+#main_navigation A {
+	color: #2B1B17;
+	text-decoration: none;
+	outline: none;
+	padding-right: 15px;
+}
+
+#main_navigation A:hover {
+	color: #2B1B17;
+}
+
+#main_navigation A.selected {
+	color: #2B1B17;
+	font-weight: bold;
+}

@@ -1,0 +1,616 @@
+/*
+Put here your own style
+*/
+
+@import "styles.css";
+##@import "bootstrap.min.css";
+@import "core.min.css";
+@import "components.min.css";
+@import "colors.min.css";
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+
+table {
+width: 99%;
+border-collapse: collapse;
+border-spacing: 0;
+margin-left: 0px;
+margin-right: 2px;
+#background-color: green;
+overflow: hidden;
+}
+
+#bg {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+  z-index:-5;
+}
+
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+}
+.ox-list-info-detail {
+	border: 1px solid #C6C6C6;
+	background: #DADADA;
+}
+
+#imageContainer {
+    width:50px;
+    height:25px;
+    position:relative;
+    display:inline-block;
+    overflow:hidden;
+}
+
+#imageContainer img {
+    width:100%;
+    height: 100%;
+}
+
+.row-red A.row-red {
+	font-weight: bold;
+	color: red;
+}
+
+a {
+    color: #fcfcfc;
+    text-decoration: none;
+}
+
+body {
+	#background: linear-gradient(green, white);
+	background: radial-gradient(circle, #f5f5f5, white);
+	background-color: #f5f5f5;
+	background-image: url("bg-old-man-beach.png");
+	font-size: 17px;
+	font-family: 'Segoe UI', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.ox-list-subheader input[type="text"] { 
+    height: 28px;
+    border: 0px solid green;
+	
+}
+
+.ox-list-subheader th {
+    padding-left: 15px;
+    border: 0px solid #54677b;
+    vertical-align: top;
+	color:#ffffff;
+}
+.ox-list-pair td, .ox-list-odd td {
+    padding-left: 15px;
+    border: 0px solid #54677b;
+}
+
+.ox-list-pair td{
+    position: relative;
+    background-color: #f5f5f5;
+    height: 70px;
+    border-bottom-color: #54677b !important;
+}
+
+.ox-list-odd td{
+    position: relative;
+    height: 70px;
+    border-bottom-color: #b8baba !important;
+    background-color: #fcfcfc;
+    color: #54677b
+}
+.ox-list-header th {
+    border: 0px solid #54677b;
+    text-align: left;
+	text-transform: capitalize;
+    COLOR: #FFFFFF;
+    background: #333;
+    padding-bottom:8px;
+    padding-top:8px;
+
+}
+
+
+
+A#show_modules {
+    background: #BEE49B none repeat scroll 0% 0%;
+    border: 1px solid #C6C6C6;
+    padding: 10px;
+    margin-right: 4px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 1px 2px #CCC;
+}
+
+input[type="button"]{
+    display: inline-block;
+    font-family: 'Segoe UI', sans-serif;
+    #letter-spacing: 2px;
+    font-size: 16px;
+    border-image: none;
+    
+    color: #ffffff;
+	background: #26A69A none repeat scroll 0% 0%;
+	box-shadow: 0px 1px 3px #FFFFFF;
+	padding-top: 8px;
+	padding-bottom:8px;
+}
+input[type="button"]:hover{
+	display: inline-block;
+    font-family: 'Segoe UI', sans-serif;
+    #letter-spacing: 2px;
+    font-size: 16px;
+    border-image: none;
+    
+    color: #ffffff;
+	background: #000000 none repeat scroll 0% 0%;
+	box-shadow: 0px 1px 3px #FFFFFF;
+	padding-top: 16px;
+}
+
+
+select {
+	height: 40px;
+	padding: 1px;
+	width:360px;
+	margin-bottom:5px;
+	margin-top:5px;
+}
+input[type="text"], input[type="password"], input[type="file"] {
+    height: 40px;
+	width:360px;
+	
+}
+input[type="text"], input[type="password"], input[type="file"], textarea {
+    padding: 5px;
+	margin-bottom:4px;
+	margin-top:4px;
+}
+
+input[type="text"], input[type="password"], input[type="file"], select, textarea {
+	border-color: #CCC;
+	border-style: solid;	
+	border-width: 1px;
+	box-shadow: rgba(0, 0, 0, 0.046875) 0px 1px 3px 0px inset, rgba(255, 255, 255, 0.0742188) 0px 1px 0px 0px;
+	font-size: 13px;
+	outline-color: black;
+	outline-style: none;
+	outline-width: 0px;
+	border-radius: 7px;
+	#-moz-border-radius: 3px;
+	#-webkit-border-radius: 3px;
+	
+	width:360px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="file"]:focus, select:focus, textarea:focus {
+	outline: 0;
+	border-color: #56b4ef;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);
+	-moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);
+	box-shadow: inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);
+}
+
+
+.ox-button-bar, .ox-collection-list-actions {
+    background: #fcfcfc none repeat scroll 0% 0%;
+    padding: 10px;
+    margin-left: -1px;
+    margin-right: -1px;
+    min-height: 15px;
+    border-top: 0px solid #fcfcfc;
+    box-shadow: 0px 0px 0px #fcfcfc;
+}
+
+.ox-label {
+    margin-bottom: 1px;
+    vertical-align:middle;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 17px;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.editor {
+    margin-bottom: 1px;
+    vertical-align:middle;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 17px;
+    #text-transform: capitalize;
+    text-align: left;
+}
+
+A#show_modules:HOVER { 
+	color: #ffffff;
+}
+
+.selected .module-name, .selected .module-description {
+	color: black;
+}
+
+#module_description {
+    padding: 10px 10px 10px 10px;
+    font-size: 30px;
+    text-transform: capitalize;
+    font-weight: bold;
+    color: #808080;
+    text-align: left;
+}
+
+#main_navigation A:hover {
+	color: #E5E332;
+}
+
+#main_navigation A.selected {
+    color: #232324;
+    font-weight: bold;
+    background:#FFF;
+    #font-size: 10px;
+}
+
+
+#main_navigation_left { 
+	position: absolute; 
+	top: 10px; 
+	left: 10px;
+}
+
+#main_navigation_middle {
+    position: absolute;
+    top: 5px;
+    right: 120px;
+    
+    padding-left: 120px;
+    
+}
+
+#main_navigation_middle2 {
+    position: absolute;
+    top: 5px;
+    right: 400px;
+
+}
+#main_navigation_right { 
+	position: absolute; 
+	top: 10px; 
+	right: 10px; 
+	padding-left: 0px; 
+}
+
+#main_navigation_right_bridge1 { 
+	background-color: #228b22;
+}
+
+#main_navigation_right_bridge2 { 
+	background-color: rgba(0, 0, 0, 0.0);
+}
+
+#main_navigation_right_content { 
+	background-color:#228b22;
+	padding-right: 0px;
+	padding-left: 0px; 
+}
+
+
+#main_navigation {
+    z-index: 1;
+    background: #26A69A none repeat scroll 0% 0%;
+    padding: 15px;
+    height: 65px;
+    box-shadow: 0px 0px 0px #000;
+}
+#main_navigation A {
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 12px;
+    outline: medium none; 
+    border: medium none #000;
+    border-top-left-radius: 5px;
+    #border-top-right-radius: 5px;
+    padding-left: 17px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: 0px 0px 0px #B8BABA;
+    #background: #000;
+}
+
+.sign-in {	 
+	#background: #b5d756;
+	font-weight: bold;
+	font-size:18px;
+	
+	
+}
+
+.sing-in A:hover {
+	color: Black;
+}
+
+
+.ox-section-tab {
+    padding: 6px;
+    font-weight: bold;
+    float: left;
+    background-color: black;
+}
+.sing-out A:hover {
+color: Black;
+}
+
+.sign-out {
+	color: black;
+	float: right;
+}
+
+A.sign-out  {
+	padding-right: 0px;
+}
+
+.ui-dialog .ui-resizable-se { width: 40px; height: 14px; right: 3px; bottom: 3px; }
+.ui-draggable .ui-dialog-titlebar { cursor: move; }
+
+$( ".selector" ).ui-dialog({
+height: 400
+});
+
+
+.ox-button-bar, .ox-collection-list-actions {
+    background: #F6F1F1 none repeat scroll 0% 0%;
+    padding: 10px;
+    margin-left: -1px;
+    margin-right: -1px;
+    min-height: 15px;
+    border-top: 1px solid #CCC;
+    #box-shadow: 0px 2px 7px #CCC;
+}
+
+.ox-section-link {
+	text-transform: capitalize;
+	color: white;
+}
+
+.ox-button-bar, .ox-collection-list-actions {
+	background: #EFE6E6;
+	padding: 10px;
+	margin-left: -1px;
+	margin-right: -1px;
+	min-height: 15px;
+	border-top: 1px solid #CCCCCC;
+	#box-shadow: 0px 2px 7px #CCCCCC; 
+	-moz-box-shadow: 0px 2px 7px #CCCCCC; 
+	-webkit-box-shadow: 0px 2px 7px #CCCCCC;	
+}
+
+.ox-page-navigation-selected {
+    border-radius: 4px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    color: #b8baba;
+    border: 1px solid #000000;
+    box-shadow: 0px 1px 2px #CCCCCC;
+    -moz-box-shadow: 0px 1px 2px #CCCCCC;
+    -webkit-box-shadow: 0px 1px 2px #b8baba;
+}
+
+.ox-button-bar .ox-button-bar-button a, .ox-button-bar-mode-button, .ox-collection-list-actions .ox-button-bar-button a {
+    border: 1px solid #b8baba;
+    padding: 6px 6px 6px 0px;
+    color: #191919;
+    font-weight: bold;
+    text-decoration: none;
+}
+.ox-button-bar, .ox-collection-list-actions {
+    background: #ffffff none repeat scroll 0% 0%;
+	padding: 10px 10px 30px;
+	#margin-left: 2px;
+	margin-right: 2px;
+	min-height: 30px;
+	font-family: 'Segoe UI', sans-serif;
+	text-transform: capitalize;
+	border-top: 1px solid #F2DEDE;
+	#box-shadow: 0px 2px 7px #F9C1C1;
+	width: 99%;
+
+}
+.ox-button-bar .ox-button-bar-button a:hover, .ox-collection-list-actions .ox-button-bar-button a:hover, .ox-subcontroller-select a {  
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;	
+	padding: 6px 6px 6px 0px;
+	color: #F6F1F1;
+	#border: 1px solid #C6C6C6;	
+	#box-shadow: 0px 1px 2px #CCCCCC; 
+	-moz-box-shadow: 0px 1px 2px #CCCCCC; 
+	-webkit-box-shadow: 0px 1px 2px #CCCCCC;
+	background:blue;
+}
+
+.ox-button-bar a:focus { 
+	outline: none; 
+}
+
+
+.ox-bottom-buttons input[id*="delete"], .ox-bottom-buttons input[id*="remove"], .ox-bottom-buttons input[id*="borrar"], .ipad .ox-bottom-buttons input[id*="delete"]:hover, .ipad .ox-bottom-buttons input[id*="remove"]:hover, .ipad .ox-bottom-buttons input[id*="borrar"]:hover {
+    background: #26A69A none repeat scroll 0% 0%;
+    border-color: #B0281A;
+    color: #FFF;
+    box-shadow: 0px 1px 3px #F00;
+}
+
+
+
+.ox-bottom-buttons input:nth-of-type(2):hover {
+    background: #000000;
+    #border-color: #cccccc;
+    #box-shadow: 0px 1px 7px blue;
+    -moz-box-shadow: 0px 1px 7px blue;
+    -webkit-box-shadow: 0px 0px 0px blue;
+}
+
+#sign_in_box {
+	height: 430px;
+	float: right; 
+	padding: 10px 0px 25px 22px;  
+	margin: 30px 60px 20px 20px; 
+	background: #ffffff; 
+	border: 0px solid #eaf2ce;
+}
+
+#sign_in_box img {
+  display: block;
+  margin: 0 auto;
+
+}
+
+input#ox_pensionmanager_SignIn__SignIn___signIn {
+    color: #000000;
+    background: #FF7868;
+    box-shadow: 0px 1px 0px #FFFFFF;
+    font-family: 'Segoe UI', sans-serif;
+    text-transform: capitalize;
+    font-size: 14px;
+    letter-spacing: normal;
+    display: block;
+    width: 270px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#ox_pensionmanager_SignIn__user, #ox_pensionmanager_SignIn__password {
+    height: 40px;
+    width:300px;
+    
+	
+}
+.ui-widget-content a {
+     #color: #ffffff;
+}
+
+.ox-bottom-buttons {
+	margin-left: 3px;
+	margin-right: 15px; /* To adjust collections width */
+	#stext-align: center; 
+	margin-top:10px;
+	padding-left:100px;
+}
+
+.ox-bottom-buttons input:nth-of-type(2), .ipad .ox-bottom-buttons input:nth-of-type(2):hover {
+    color: #ffffff;
+    background: #26A69A none repeat scroll 0% 0%;
+    box-shadow: 0px 0px 0px #FFFFFF;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 300px;
+
+}
+
+
+a {
+    color: #54677b
+    text-decoration: none;
+    width:200px;
+}
+
+.login-container .footer {
+    left: 0px;
+    right: 0px;
+    text-align: center;
+   
+}
+.footer {
+    position: absolute;
+    bottom: 20px;
+    color: #ffffff;
+}
+.text-muted {
+    color: #red;
+    font-size: 11px;
+}
+* {
+    box-sizing: border-box;
+}
+
+
+ 
+#welcome {
+	margin: 20px;	
+	padding-left: 20px; 
+	padding-top: 5px; 	
+	font-size: 13px; 
+}
+
+#welcome h1 {
+	font-weight: normal; 
+	font-size: 25px; 
+	color: #DD4B39; 
+	margin-bottom: 5px;
+}
+
+#welcome h2 {
+	font-weight: normal; 
+	font-size: 16px; 
+	margin-top: 5px;
+}
+
+
+
+#footer text-muted {
+	font-size: 11px;
+}
+#footer text-muted a{
+    position: absolute;
+    bottom: 20px;
+    color: #FFF;
+}
+
+.ox-frame {
+	margin-bottom: 5px;
+	padding: 10px 10px 3px 10px; 
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;	
+	border: 1px solid #C6C6C6;	
+	box-shadow: 0px 1px 3px #CCCCCC; 
+	-moz-box-shadow: 0px 1px 3px #CCCCCC; 
+	-webkit-box-shadow: 0px 1px 3px #CCCCCC;
+}
+.module-name, .folder-row {
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+}
+
+.ui-widget-content a {
+    #color: #ffffff;
+}
+.ox-list-header a {
+    border: 0px solid #54677b;
+    text-align: left;
+    COLOR: #FFFFFF;
+    background: #333;
+    padding-bottom:8px;
+    padding-top:1px;
+
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}

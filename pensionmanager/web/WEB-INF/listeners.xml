@@ -1,0 +1,3 @@
+<listener>  
+       <listener-class>ng.com.justjava.epayment.listener.AppContextListener</listener-class>  
+</listener>
