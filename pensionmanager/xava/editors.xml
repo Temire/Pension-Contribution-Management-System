@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "ISO-8859-1"?>
+
+<!DOCTYPE editors SYSTEM "dtds/editors.dtd">
+
+<!-- OpenXavaTest -->
+
+<editors>
+
+	<editor name="opt" url="options.jsp">
+		<for-reference model="PaymentOption" />
+	</editor>
+
+</editors>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pfa_audit_report" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a129ea4-90d3-4203-b6b9-3e13ee584d96">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FROM_DATE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="TO_DATE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="USER_NAME" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT CONCAT(o.givenName,' ',o.familyName) User,
+CASE r.revisionType WHEN 0 THEN CONCAT('CREATED',' ','Pension Fund Administrator') WHEN 1 THEN CONCAT('MODIFIED',' ','Pension Fund Administrator')
+WHEN 2 THEN CONCAT('DELETED',' ','Pension Fund Administrator') END AS REVTYPE,
+a.name 'Affected Entity', FROM_UNIXTIME(r.timestamp/1000)
+FROM pensionmanager.accountownerdetail AS a JOIN pensionmanager.pensionfundadministrator_aud AS p
+ON a.id = p.id
+JOIN pensionmanager.reventity AS r
+ON p.rev = r.id
+JOIN pensionmanager.oxusers AS o
+ON r.userName = o.name
+WHERE (FROM_UNIXTIME(r.timestamp/1000) BETWEEN $P{FROM_DATE} AND $P{TO_DATE})
+AND r.username LIKE $P{USER_NAME}]]>
+	</queryString>
+	<field name="User" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REVTYPE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Affected Entity" class="java.lang.String"/>
+	<field name="FROM_UNIXTIME(r.timestamp/1000)" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="76" splitType="Stretch">
+			<staticText>
+				<reportElement x="113" y="21" width="548" height="41" uuid="52046c69-fc80-4584-b844-e5bf1b58c6c0"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRAL SECURITIES CLEARING SYSTEM]]></text>
+			</staticText>
+			<image>
+				<reportElement x="661" y="0" width="141" height="76" uuid="cbc9391b-b245-42d9-845f-b3f19e2cc3ca"/>
+				<imageExpression><![CDATA["C:\\openxava-5.0.0\\tomcat\\webapps\\pensionmanager\\WEB-INF\\classes\\logo-cscs.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="214" y="0" width="342" height="28" uuid="e00a2507-5eba-41c5-9020-3f1036577d4c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PENSION FUND ADMINISTRATOR AUDIT REPORT]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="445" y="2" width="100" height="20" uuid="b9159787-7b4f-465c-8ccd-89c89c3a8675"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Affected Entity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="2" width="100" height="20" uuid="c30e0ebf-9724-4ec5-85f9-8a52a40dd7c1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="28" height="20" uuid="abc85d5c-f80f-40d4-a4d2-59719709fc4f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[S/N]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="2" width="100" height="20" uuid="f73e549b-95c2-41ce-95e4-db1e20713c0c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[User]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="2" width="100" height="20" uuid="64c5d9b7-6700-4188-8081-c9714ff13b8b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Action]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="236" y="0" width="194" height="20" uuid="c3b1f7a4-0533-4d7c-b810-b03ce92b9a87"/>
+				<textFieldExpression><![CDATA[$F{REVTYPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="642" y="0" width="100" height="20" uuid="af19db0e-fb91-4e78-a372-4f7393389e7c"/>
+				<textFieldExpression><![CDATA[$F{FROM_UNIXTIME(r.timestamp/1000)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="28" height="20" uuid="e94ce926-5ea9-4cc7-a2ed-7426a373c6cf"/>
+				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="39" y="1" width="175" height="20" uuid="081ab2ab-b8e2-4f00-9206-89977cedb9c6"/>
+				<textFieldExpression><![CDATA[$F{User}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="1" width="180" height="20" uuid="a7e4e94d-63c8-4f49-820e-0cb5804214e7"/>
+				<textFieldExpression><![CDATA[$F{Affected Entity}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="682" y="0" width="80" height="20" uuid="4bb3c396-c6d7-42d7-8f21-533accfe8b4a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="762" y="0" width="40" height="20" uuid="f573fd85-cfb4-4e8f-a4b2-29fdbc03226d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

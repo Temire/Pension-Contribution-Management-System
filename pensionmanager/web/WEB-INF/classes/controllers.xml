@@ -1,0 +1,695 @@
+<?xml version = "1.0" encoding = "ISO-8859-1"?>
+
+<!DOCTYPE controllers SYSTEM "dtds/controllers.dtd">
+
+<!-- controllers.xml: OpenXava core controllers In your project use the name 
+	'controllers.xml' or 'controladores.xml' If you have to override some of 
+	this controller for you application, you only need to create a controller 
+	in your application with the same name of the controller here that you want 
+	to override. -->
+
+<controllers>
+
+	<!-- <env-var name="XAVA_SEARCH_ACTION" value="MyReference.globalSearch" /> -->
+	<!-- object name="magbelpay_eventBus" class="com.google.common.eventbus.EventBus" 
+		scope="global" / -->
+	<!-- object name="xava_treeViewParser" class="org.openxava.web.editors.TreeViewParser" 
+		/ -->
+		
+	<env-var name="XAVA_SEARCH_ACTION" value="Chams.searchExcludingDeleted"/>
+	
+	<controller name="Chams">
+		<action name="searchExcludingDeleted" hidden="true" class="ng.com.justjava.epayment.action.SearchExcludingDeletedAction"/>
+		<!-- hidden="true": Thus the action will not be shown in button bar -->
+	</controller>
+		
+	<controller name="Empty">
+	<!-- 	<action name="upload" class="ng.com.justjava.epayment.action.LoadFileAction" mode="ALL" /> -->
+		
+	</controller>
+	
+	<controller name="PersonalPayment">
+		<action name="pay" class="ng.com.justjava.epayment.action.PaymentAction" mode="detail" />
+	</controller>
+
+	<controller name="Register">
+		<action name="register" class="ng.com.justjava.epayment.action.RegisterAction" hidden="true"/>
+	</controller>
+	
+	<controller name="RemitPersonalContribution">
+		<action name="remit" class="ng.com.justjava.epayment.action.RemitPersonalContributionAction" />
+	</controller>	
+
+	<controller name="Retry">
+		<action name="retry" confirm="true" mode="list" in-each-row="true"
+		class="ng.com.justjava.epayment.action.RetryAction" />
+	</controller>
+	
+	<controller name="ApproveMonthlyRemittance">
+		<action name="approve" confirm="true"
+		 class="ng.com.justjava.epayment.action.ApproveMonthlyUpload"  mode="detail" />
+		<action name="reject"  confirm="true" 
+			class="ng.com.justjava.epayment.action.ApproveMonthlyUpload" mode="detail">
+			<set property="reject" value="true"/>	
+		</action>
+<!-- 		<action name="search" hidden="true"
+			class="ng.com.justjava.epayment.action.MonthlyRemittanceSearchAction" /> -->
+	</controller>	
+	
+	<controller name="MonthlyUpload">
+		<action name="upload" class="ng.com.justjava.epayment.action.LoadFileAction" mode="detail" />
+		
+		<action name="init" on-init="true" hidden="true" 
+		class="ng.com.justjava.epayment.action.InitMonthlyUploadAction" mode="ALL" />
+		
+		<action name="sendForApproval" mode="detail"	by-default="if-possible" 
+		class="ng.com.justjava.epayment.action.SendMonthlyUploadForApprovalAction" confirm="true" keystroke="Control S"/>	
+	</controller>	
+	
+	<controller name="InitializePFC">
+		<action name="init" on-init="true" hidden="true" 
+				class="ng.com.justjava.epayment.action.InitPFCAction"/>
+	</controller>
+	
+	<controller name="saveOnly">
+		<action name="save" confirm="true" class="org.openxava.actions.SaveAction" mode="detail"/>
+	</controller>
+
+	<controller name="RemitPFATransfer">
+		<action name="Remit" confirm="true" class="org.openxava.actions.SaveAction" mode="list"/>
+	</controller>	
+	
+	<controller name="PensionCalculator">
+		<action name="Calculate" class="ng.com.justjava.epayment.action.CalculateAction"/>
+		<action name="load" on-init="true" hidden="true" 
+				class="ng.com.justjava.epayment.action.InitCalculatorAction"/>
+	</controller>		
+	
+	
+	<controller name="PFALoader">
+		<action name="load" on-init="true" hidden="true" 
+				class="ng.com.justjava.epayment.action.InitPFAAction" />
+	</controller>
+	
+	<controller name="PFCLoader">
+		<action name="load" on-init="true" hidden="true" 
+				class="ng.com.justjava.epayment.action.InitPFCAction" />
+	</controller>	
+		
+	<controller name="PFCViewLoader">
+		<action name="load" on-init="true" hidden="true" 
+				class="ng.com.justjava.epayment.action.InitPFCViewAction" />
+	</controller>
+	
+			
+	<controller name="SendForPayment">
+		<action name="sendPayment"	class="ng.com.justjava.epayment.action.SendInvestorPayment"/>
+			
+	</controller>
+	
+	<controller name="RemitPension">
+		<action name="initRemit" hidden="true" on-init="true"
+			 	class="ng.com.justjava.epayment.action.InitRemitPensionAction"/>
+		<action name="viewDetail" hidden="true" on-init="true"
+			 	class="ng.com.justjava.epayment.action.InitRemitPensionAction"/>
+		<action name="remit" confirm="true" class="ng.com.justjava.epayment.action.RemitPensionAction"/>
+		
+	</controller>
+	
+	<controller name="InitiatePensionRemittance">
+		<action name="initRemit" hidden="true" on-init="true"
+			 	class="ng.com.justjava.epayment.action.InitRemitPensionAction"/>
+		<action name="viewDetail" hidden="true" on-init="true"
+			 	class="ng.com.justjava.epayment.action.InitRemitPensionAction"/>
+		<action name="sendForApproval" confirm="true" class="ng.com.justjava.epayment.action.SendForApprovalAction"/>
+		
+	</controller>	
+	<controller name="ApprovePensionRemittance">
+		<action name="initRemit" hidden="true" on-init="true"
+			 	class="ng.com.justjava.epayment.action.InitRemitPensionAction"/>
+		<action name="viewDetail" hidden="true" on-init="true"
+			 	class="ng.com.justjava.epayment.action.InitRemitPensionAction"/>
+		<action name="approve" confirm="true" class="ng.com.justjava.epayment.action.ApproveRemitPensionAction"
+		mode="detail"/>		
+	</controller>	
+	<controller name="RemitPensionRemittance">
+		<action name="initRemit" hidden="true" on-init="true"
+			 	class="ng.com.justjava.epayment.action.InitRemitPensionAction"/>
+		<action name="viewDetail" hidden="true" on-init="true"
+			 	class="ng.com.justjava.epayment.action.InitRemitPensionAction"/>
+		<action name="remit" confirm="true" class="ng.com.justjava.epayment.action.RemitAction"
+		mode="detail"/>		
+	</controller>		
+	
+	<controller name="TypicalWithoutNew2">
+		
+	</controller>
+	
+	<controller name="DownloadSchedule">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.DownloadScheduleAction"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+	
+	<controller name="PFATransfer">
+	
+		<action name="change" in-each-row="true" class="ng.com.justjava.epayment.action.SavePFATransferAction" 
+		mode="list" />
+		
+		<action name="transfer" confirm="true" class="ng.com.justjava.epayment.action.SavePFATransferAction" 
+		mode="detail"/>
+		
+		<action name="initTransfer" hidden="true" on-init="true" 
+				class="ng.com.justjava.epayment.action.InitializePFATransferAction" />
+	</controller>
+	
+	<controller name="CloseComplaint">
+		<action name="close" confirm="true" class="ng.com.justjava.epayment.action.CloseComplaintAction" mode="detail"/>
+		<action name="reOpen" confirm="true" class="ng.com.justjava.epayment.action.ReOpenComplaintAction" mode="detail"/>
+		<!--  <action name="save" confirm="true" class="org.openxava.actions.SaveAction" mode="detail"/> -->
+	</controller>
+	<controller name="ViewComplaint">
+
+	</controller>	
+		
+	<controller name="LodgeComplaint">
+		<action name="save" confirm="true" class="ng.com.justjava.epayment.action.LodgeComplaintAction" mode="detail"/>
+		<action  name="new" class="org.openxava.actions.NewAction"
+			image="new.gif"	keystroke="Control N">
+			<set property="restoreModel" value="true"/>	
+		</action>
+		<action  name="addComment" hidden="true" class="ng.com.justjava.epayment.action.AddCommentAction" 
+		keystroke="Control C"/>
+		
+			
+		<action  name="init" hidden="true" on-init="true" class="ng.com.justjava.epayment.action.InitComplaintAction"/>
+	</controller>
+			
+	<controller name="PFATransferVerify">
+		 
+		<action name="verified" confirm="true" in-each-row="true"
+		 class="ng.com.justjava.epayment.action.ApprovePFATransferAction" mode="NONE"/> 
+		 
+		<action name="reject" confirm="true" in-each-row="true"
+		 class="ng.com.justjava.epayment.action.RejectPFATransferAction" mode="NONE"/> 
+		 
+		<action name="onHold" confirm="true" in-each-row="true"
+		 class="ng.com.justjava.epayment.action.OnHoldPFATransferAction" mode="NONE"/> 
+		 
+	</controller>
+	<controller name="PFATransferStatusChange"> 
+		<action name="fundTransferEffected" confirm="true" in-each-row="true"
+		 class="ng.com.justjava.epayment.action.ApprovePFATransferAction" mode="NONE"/>  
+	</controller>	
+	
+	<controller name="FundTransferConfirmed"> 
+		<action name="confirmed" confirm="true" in-each-row="true"
+		 class="ng.com.justjava.epayment.action.ApprovePFATransferAction" mode="NONE"/>  
+	</controller>	
+	
+	<controller name="PFATransferApprove">
+		 
+		<action name="approve" confirm="true" in-each-row="true"
+		 class="ng.com.justjava.epayment.action.ApprovePFATransferAction" mode="NONE"/> 
+		 
+		<action name="reject" confirm="true" in-each-row="true"
+		 class="ng.com.justjava.epayment.action.RejectPFATransferAction" mode="NONE"/> 
+		 
+		<action name="onHold" confirm="true" in-each-row="true"
+		 class="ng.com.justjava.epayment.action.OnHoldPFATransferAction" mode="NONE"/> 
+		 
+	</controller>		
+	
+	<controller name="Customer">
+
+		<action name="save"	class="ng.com.justjava.epayment.action.SaveCustomerAction"/>
+		<action name="makePayment"	class="ng.com.justjava.epayment.action.DisplayMakePaymentAction"/>
+		
+		<action name="cancel" 
+			class="org.openxava.actions.CancelDialogAction"/>	
+	</controller>	
+	
+	<controller name="Corporate">
+		<extends controller="Typical"/>
+		<action name="save" class="ng.com.justjava.epayment.action.SaveCorporateAction"
+		 image="save.gif"  />	
+	</controller>
+
+	<controller name="RSAHolder">
+		<extends controller="Typical"/>
+		<action name="refresh" mode="detail" class="ng.com.justjava.epayment.action.RefreshRSAHolderAction" image="refresh.gif"
+			keystroke="control B"/>	
+			
+		<action name="save" class="ng.com.justjava.epayment.action.SaveRSAHolderAction" mode="detail"	 image="save.gif"/>
+		 
+		<action name="upload" class="ng.com.justjava.epayment.action.LoadFileAction" mode="list" />
+	</controller>		
+		
+	<controller name="CorporateUser_">
+		<extends controller="TypicalWithoutNew"/>
+		
+		<action name="editUser" hidden="true"
+			class="ng.com.justjava.epayment.action.InitializeCorporateUser" image="edit.gif"  on-init="true" />
+		<action name="newUser" hidden="true"
+			class="ng.com.justjava.epayment.action.AddNewCorporateUserAction"  on-init="true" />			
+	</controller>		
+		
+	<controller name="Agent_">
+		<action name="saveBillerAgent" hidden="true"
+			class="ng.com.justjava.epayment.action.SaveBillerAgentAction" />
+			
+		<action name="editBillerAgent" hidden="true"
+			class="ng.com.justjava.epayment.action.EditBillerAgentAction" />	
+			
+					
+		<action name="newBillerAgent" hidden="true"
+			class="ng.com.justjava.epayment.action.AddNewBillerAgentAction" />	
+	</controller>	
+			
+	<controller name="MyReference">
+
+		<action name="search" hidden="true"
+			class="ng.com.justjava.epayment.action.MySearchAction" image="search.gif" />
+
+		<action name="globalSearch" hidden="true"
+			class="ng.com.justjava.epayment.action.GlobalSearchAction" image="search.gif" />
+	</controller>
+
+	<controller name="Profile">
+		<extends controller="Typical" />
+		<action name="save" mode="detail" by-default="if-possible"
+			class="ng.com.justjava.epayment.action.SaveProfileAction" image="save.gif" keystroke="Control S" />
+		<action name="hideComponents" hidden="true"
+			class="ng.com.justjava.epayment.action.ProfileAction" on-init="true" />
+	</controller>
+
+
+	<controller name="TypicalWithoutNew">
+		<extends controller="Navigation" />
+		<extends controller="CRUDwithoutNew" />
+		<extends controller="ExtendedPrint" />
+	</controller>
+	
+	<controller name="CRUDwithoutNewDelete">
+		<!-- <action name="new" class="org.openxava.actions.NewAction" image="new.gif" 
+			keystroke="Control N"> <set property="restoreModel" value="true"/> </action> -->
+		<action name="save" mode="detail" by-default="if-possible"
+			class="org.openxava.actions.SaveAction" image="save.gif" keystroke="Control S" />
+
+		<!-- <action name="delete" mode="detail" confirm="true" class="org.openxava.actions.DeleteAction" 
+			image="delete.gif" keystroke="Control D"/> -->
+
+		<action name="search" mode="detail"
+			class="org.openxava.actions.OpenSearchDialogAction" image="find.gif"
+			keystroke="control B" />
+
+		<action name="refresh" mode="detail" class="org.openxava.actions.SearchAction"
+			image="refresh.gif" keystroke="control B" />
+
+		<action name="searchByViewKey" hidden="true"
+			class="org.openxava.actions.SearchByViewKeyAction" />
+
+		<action name="searchExecutingOnChange" hidden="true"
+			class="org.openxava.actions.SearchExecutingOnChangeAction" />
+
+		<action name="searchReadOnly" hidden="true"
+			class="org.openxava.actions.SearchReadOnlyAction" />
+
+	</controller>	
+	<controller name="MakePayment">
+		<action name="processPayment" confirm="true" class="ng.com.justjava.epayment.action.MakePaymentAction" />
+		
+		<action name="repay" class="ng.com.justjava.epayment.action.RePaymentAction" in-each-row="true" mode="list"/>
+		
+		<action name="initialize" hidden="true"
+			class="ng.com.justjava.epayment.action.InitializeMakePaymentAction" on-init="true" />
+	</controller>	
+
+	<controller name="PayBill">
+		<action name="payBill" confirm="true" mode="detail"
+			by-default="if-possible"
+			class="ng.com.justjava.epayment.action.SavePayBillAction"
+			image="save.gif"
+			keystroke="Control S"/>
+			
+		<action name="new" class="org.openxava.actions.NewAction"
+			image="new.gif"
+			keystroke="Control N">
+			<set property="restoreModel" value="true"/>
+		</action>
+	</controller>
+	<controller name="CRUDwithoutNew">
+		<!-- <action name="new" class="org.openxava.actions.NewAction" image="new.gif" 
+			keystroke="Control N"> <set property="restoreModel" value="true"/> </action> -->
+		<action name="save" mode="detail" by-default="if-possible"
+			class="org.openxava.actions.SaveAction" image="save.gif" keystroke="Control S" />
+
+		<!-- <action name="delete" mode="detail" confirm="true" class="org.openxava.actions.DeleteAction" 
+			image="delete.gif" keystroke="Control D"/> -->
+
+		<action name="search" mode="detail"
+			class="org.openxava.actions.OpenSearchDialogAction" image="find.gif"
+			keystroke="control B" />
+
+		<action name="refresh" mode="detail" class="org.openxava.actions.SearchAction"
+			image="refresh.gif" keystroke="control B" />
+
+		<action name="searchByViewKey" hidden="true"
+			class="org.openxava.actions.SearchByViewKeyAction" />
+
+		<action name="searchExecutingOnChange" hidden="true"
+			class="org.openxava.actions.SearchExecutingOnChangeAction" />
+
+		<action name="searchReadOnly" hidden="true"
+			class="org.openxava.actions.SearchReadOnlyAction" />
+
+		<action name="deleteSelected" mode="list" confirm="true"
+			class="org.openxava.actions.DeleteSelectedAction" keystroke="Control D" />
+
+		<action name="deleteRow" mode="NONE" confirm="true"
+			class="org.openxava.actions.DeleteSelectedAction" image="delete.gif"
+			in-each-row="true" />
+
+	</controller>
+
+
+	<controller name="AddRole">
+		<extends controller="AddToCollection" />
+		<action name="add"
+			class="ng.com.justjava.epayment.action.AddSelectedRolesAction" />
+	</controller>
+
+<!-- 	<controller name="Corporate">
+		<extends controller="Typical" />
+		<action name="disable" confirm="true"
+			class="ng.com.justjava.epayment.action.DisableCorporateAction" />
+	</controller> -->
+	
+	<controller name="CorporateSpecial">
+		<action name="saveCorporate" mode="detail" by-default="if-possible"
+			class="ng.com.justjava.epayment.action.SaveCorporateAction" image="save.gif" keystroke="Control S">
+<!-- 			<set value="false" property="resetAfter" /> -->
+		</action>
+		<action name="refresh" mode="detail" class="org.openxava.actions.SearchAction"
+			image="refresh.gif" keystroke="control B" />
+			
+		<action name="myCorporate" mode="detail" hidden="true" on-init="true"
+			class="ng.com.justjava.epayment.action.LoadMyCorporateAction">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+
+	</controller>
+	
+	<controller name="ViewMyRecord">
+		<action name="myRecord" hidden="true" on-init="true"	class="ng.com.justjava.epayment.action.LoadRSAHolderAction"/>
+		<action name="save" mode="detail" by-default="if-possible"
+			class="org.openxava.actions.SaveAction" image="save.gif" keystroke="Control S">
+			<set value="false" property="resetAfter" />
+		</action>		
+	</controller>	
+
+	<controller name="SystemWideSetup">
+		<action name="save" mode="detail" by-default="if-possible"
+			class="org.openxava.actions.SaveAction" image="save.gif" keystroke="Control S">
+			<set value="false" property="resetAfter" />
+		</action>
+
+		<action name="myCorporate" mode="detail" hidden="true" on-init="true"
+			class="ng.com.justjava.epayment.action.LoadSystemWideSetupAction">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+
+	</controller>
+
+
+
+	<controller name="magpayListOnly">
+		<extends controller="ExtendedPrint" />
+		<action name="initList" on-init="true"
+			class="org.openxava.actions.InitListAction" hidden="true" />
+		<action name="init" class="org.openxava.actions.GoListAction"
+			hidden="true" on-init="true" />
+	</controller>
+
+	<controller name="Return">
+		<action name="close" label="Close"  class="ng.com.justjava.epayment.action.CloseAction" />
+
+		<action name="return" label="Close"  class="ng.com.justjava.epayment.action.ReturnAction" />
+
+		<action name="approve" mode="detail"
+			class="ng.com.justjava.epayment.action.ApproveSingleTransactionAction"
+			confirm="true">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>			
+		<action name="reject" mode="detail"
+			class="ng.com.justjava.epayment.action.RejectSingleTransactionAction"
+			confirm="true">			
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+
+
+	<controller name="UserGroup">
+		<action name="addUser" class="ng.com.justjava.epayment.action.AddUserToGroup"
+			hidden="true" on-init="true" />
+	</controller>
+	<controller name="ApprovePayment">
+		<action name="viewDetail" mode="NONE"
+			class="ng.com.justjava.epayment.action.TransactionAction"
+			in-each-row="true">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+		
+		<action name="approve" mode="detail"
+			class="ng.com.justjava.epayment.action.ApproveTransactionAction"
+			confirm="true">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+<!-- 		<action name="reject" mode="list"
+			class="ng.com.justjava.epayment.action.RejectTransactionAction">
+			<use-object name="xava_view" />  Not needed since v4m2
+		</action> -->
+
+		<action name="search" by-default="if-possible" hidden="true"
+			class="ng.com.justjava.epayment.action.TransactionAction" keystroke="F8">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+
+		<action name="saveApprover" by-default="if-possible" hidden="true"
+			class="ng.com.justjava.epayment.action.SaveApproverAction">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+
+		<action name="initializeTrasaction" hidden="true" on-init="true" on-each-request="true"
+			class="ng.com.justjava.epayment.action.InitializeTransactionAction">
+			<use-object name="xava_view" />
+		</action>
+	</controller> 
+
+	<controller name="Approve">
+
+		<action name="approve" mode="list"
+			class="ng.com.justjava.epayment.action.ApproveTransactionAction"
+			confirm="true">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+<!-- 		<action name="reject" mode="list"
+			class="ng.com.justjava.epayment.action.RejectTransactionAction">
+			<use-object name="xava_view" />  Not needed since v4m2
+		</action> -->
+
+
+		<action name="searchPayment" by-default="if-possible" hidden="true"
+			class="ng.com.justjava.epayment.action.TransactionAction" keystroke="F8">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+		
+		<action name="search" by-default="if-possible" hidden="true"
+			class="ng.com.justjava.epayment.action.SimpleTransactionAction" keystroke="F8">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+
+		<action name="saveApprover" by-default="if-possible" hidden="true"
+			class="ng.com.justjava.epayment.action.SaveApproverAction">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+
+<!-- 		<action name="initializeTrasaction" hidden="true" on-init="true" on-each-request="true"
+			class="ng.com.justjava.epayment.action.InitializeTransactionAction">
+			<use-object name="xava_view" />  Not needed since v4m2
+		</action> -->
+	</controller> 
+
+	<controller name="PaymentBatch">
+		<extends controller="Typical" />
+		<action name="save" mode="detail" by-default="if-possible"
+			class="ng.com.justjava.epayment.action.BatchSaveAction" image="save.gif"
+			keystroke="Control S" />
+	</controller>
+
+
+	<controller name="FundTransfer">
+		<action name="transfer"
+			class="ng.com.justjava.epayment.action.TransferToAccountAction" />
+		<action name="validate" hidden="true"
+			class="ng.com.justjava.epayment.action.ValidateAccountAction" />
+	</controller>
+
+
+
+	<controller name="Account">
+		<extends controller="Typical" />
+		<action name="upload" class="ng.com.justjava.epayment.action.LoadFileAction" />
+		<action name="saveTransit" hidden="true"
+			class="ng.com.justjava.epayment.action.SaveTransitAccountAction" />
+	</controller>
+
+	<controller name="CustomSaveAction">
+		<action name="saveUser" hidden="true"
+			class="ng.com.justjava.epayment.action.SaveCorporateUserAction" />
+
+		<action name="saveUserGroup" hidden="true"
+			class="ng.com.justjava.epayment.action.SaveUserGroupAction" />
+
+		<action name="savePFAUser" hidden="true"
+			class="ng.com.justjava.epayment.action.SaveBillerUserAction" />
+		<action name="savePFCUser" hidden="true"
+			class="ng.com.justjava.epayment.action.SaveBillerUserAction" />			
+			
+		<action name="addRole" hidden="true" image="create_new.gif"
+			class="ng.com.justjava.epayment.action.AddRoleAction" />
+
+		<action name="addModulesRights" hidden="true" image="create_new.gif"
+			class="ng.com.justjava.epayment.action.AddModulesRightsAction" />
+
+	</controller>
+
+	<controller name="Bank">
+		<extends controller="Typical" />
+		<action name="upload" class="ng.com.justjava.epayment.action.LoadFileAction" />
+	</controller>
+
+
+	<controller name="Security">
+		<!-- <extends controller="Typical" /> -->
+		<action name="generateToken"
+			class="ng.com.justjava.epayment.action.GenerateTokenAction" />
+	</controller>
+
+	<controller name="PasswordReset">
+		<!-- <extends controller="Typical" /> -->
+		<action name="reset" in-each-row="true" mode="NONE"
+			class="ng.com.justjava.epayment.action.ResetSingleAction" />
+		<action name="resetSelected" in-each-row="false" mode="list"
+			class="ng.com.justjava.epayment.action.ResetSelectedAction" />
+	</controller>
+
+
+	<controller name="Investor">
+		<extends controller="Typical" />
+		<action name="upload" class="ng.com.justjava.epayment.action.LoadFileAction" mode="list" />
+		<action name="save" class="ng.com.justjava.epayment.action.SaveInvestorAction" mode="detail" />
+	</controller>
+	
+	<controller name="ReportController">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportAction"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+	<controller name="PensionPayitemSetup">
+		<action name="save" class="ng.com.justjava.epayment.action.PensionPayitemSetupAction"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+		
+		<action name="add" class="ng.com.justjava.epayment.action.AddNewPensionPayItem"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+		
+		<action name="remove" class="ng.com.justjava.epayment.action.PensionPayitemSetupAction"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>	
+		<action name="setupInit" hidden="true"
+			class="ng.com.justjava.epayment.action.PensionPayitemSetupInitAction"  on-init="true" />			
+		
+	</controller>	
+	
+
+	<controller name="PaymentUpload">
+		<extends controller="Typical" />
+		<action name="upload" class="ng.com.justjava.epayment.action.LoadFileAction" mode="list" />
+		<action name="sendForApproval" mode="list"
+			class="ng.com.justjava.epayment.action.InitiateApprovalAction"
+			confirm="true" />
+			
+		<action name="savePaymentInstruction" mode="detail"
+			by-default="if-possible"
+			class="org.openxava.actions.SaveAction"
+			image="save.gif"
+			keystroke="Control S"/>	
+			
+	</controller>
+
+	<controller name="PaymentInstruction">
+		<extends controller="Print" />
+		<action name="upload" class="ng.com.justjava.epayment.action.LoadFileAction" />
+	</controller>
+
+	<controller name="LoadFile">
+		<action name="loadFile"
+			class="ng.com.justjava.epayment.action.ProcessLoadedFile" />
+		<action name="cancel" class="org.openxava.actions.CancelAction" />
+	</controller>
+	<controller name="RowAction">
+		<action name="showDetail" hidden="true" mode="list" in-each-row="true"
+			class="ng.com.justjava.epayment.action.ViewDetailAction" />
+	</controller>
+	<controller name="RowAction2">
+		<action name="showDetail" hidden="true" mode="list" in-each-row="true"
+			class="ng.com.justjava.epayment.action.ViewPFADetailAction" />
+		<action name="confirm" hidden="true" mode="list" in-each-row="true"
+			class="ng.com.justjava.epayment.action.ConfirmAction" />
+	</controller>
+	
+	<controller name="ReportController">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportAction"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+	
+ 	<controller name="ReportControllerPaymentLog">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPaymentLog"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+	
+	<controller name="ReportControllerPFA">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPFA"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+	
+	<controller name="ReportControllerPencomm">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPencomm"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+	
+	<controller name="ReportControllerPFC">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPFC"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+	<!-- <controller name="LoadFile"> <action name="loadFile" class="ng.com.justjava.thehospitalmanager.action.ProcessLoadedFile" 
+		/> <action name="cancel" class="org.openxava.actions.CancelAction" /> </controller> -->
+
+</controllers>
