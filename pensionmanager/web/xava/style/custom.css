@@ -507,7 +507,7 @@ input#ox_pensionmanager_SignIn__SignIn___signIn {
 	margin-right: 15px; /* To adjust collections width */
 	#stext-align: center; 
 	margin-top:10px;
-	padding-left:100px;
+	padding-left:300px;
 }
 
 .ox-bottom-buttons input:nth-of-type(2), .ipad .ox-bottom-buttons input:nth-of-type(2):hover {

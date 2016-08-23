@@ -5,14 +5,14 @@ import javax.persistence.*;
 import ng.com.justjava.epayment.action.*;
 
 import org.openxava.annotations.*;
-@View(members="pencommNumber;pfa;email;firstName;lastName;phoneNumber")
+@View(members="PIN;pfa;email;firstName;lastName;phoneNumber")
 public class RegisterPersonalContribution {
 	
 	
 	@LabelFormat(LabelFormatType.NO_LABEL)
 	@OnChange(LoadByPencommNumberAction.class)
 	@Required
-	private String pencommNumber;
+	private String PIN;
 	
 	
 	@LabelFormat(LabelFormatType.NO_LABEL)
@@ -68,13 +68,17 @@ public class RegisterPersonalContribution {
 		this.pfa = pfa;
 	}
 
-	public String getPencommNumber() {
-		return pencommNumber;
+	
+
+	public String getPIN() {
+		return PIN;
 	}
 
-	public void setPencommNumber(String pencommNumber) {
-		this.pencommNumber = pencommNumber;
+	public void setPIN(String pIN) {
+		PIN = pIN;
 	}
+
+
 
 	@ManyToOne
 	@DescriptionsList

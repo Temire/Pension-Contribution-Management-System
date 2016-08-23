@@ -23,7 +23,7 @@ import com.openxava.naviox.model.*;
 	@View(name="pfaRecordView" , members="companies"),
 	@View(name="rsaCompanyHolders" , members="companyHolders"),
 	@View(name="pfaHolders" , members="holders")})
-@Tabs({@Tab(properties="rcNo,name,fullHoldersNumber",baseCondition = "${deleted}=0"),
+@Tabs({@Tab(properties="rcNo,name",baseCondition = "${deleted}=0"),
 	   @Tab(name="custodianView", properties="name",filter=LoginUserPFCFilter.class,baseCondition = "${custodian.id}=?")})
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name ="Administrator")
@@ -84,7 +84,7 @@ public class PensionFundAdministrator extends AccountOwnerDetail{
 	@ViewAction("")
 	@OneToMany(mappedBy="pfa")
 	@ListProperties("pencommNumber,corporate.name,firstName,secondName,pensionAmount,upload.month,upload.uploadYear.year")
-	@Condition("${pfa.id}=0 AND ${corporate.id}=0")
+	@Condition("${pfa.id}=0 AND ${corporate.id}=0 AND upload.status=5")
 	private Collection<RSAHolder> holders;
 
 
@@ -135,7 +135,7 @@ public class PensionFundAdministrator extends AccountOwnerDetail{
 	}
 
 
-	@ListProperties("name,amountSummation,totalNumberOfHolders")
+	@ListProperties("name")
 	@Transient
 	@ReadOnly
 	@ViewAction("")
@@ -159,7 +159,8 @@ public class PensionFundAdministrator extends AccountOwnerDetail{
 		}
 		
 		String query = " FROM Corporate c "
-				+ "INNER JOIN c.holders h WHERE h.pfa.id="+getId() +" ORDER BY h.upload.id" ;//+ " AND " + "h.upload.month="+month;
+				+ "INNER JOIN c.holders h WHERE "
+				+ "h.pfa.id="+getId() +" AND h.upload.status=5 " +" ORDER BY h.upload.id" ;//+ " AND " + "h.upload.month="+month;
 
 		System.out.println(" Surprising query here ==="+query);
 				
@@ -266,7 +267,17 @@ public class PensionFundAdministrator extends AccountOwnerDetail{
 		}
 		return pensionFundAdministrator;
 	}
-
+	public static PensionFundAdministrator findPFAByAccountNumber(String accountNumber){
+		PensionFundAdministrator pensionFundAdministrator = null;
+		try {
+			pensionFundAdministrator = (PensionFundAdministrator) XPersistence.getManager().createQuery
+					("FROM PensionFundAdministrator p WHERE p.account.number='"+accountNumber+"'").getSingleResult();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pensionFundAdministrator;
+	}
 /*	public Account getPensionAccount() {
 		return pensionAccount;
 	}
@@ -394,6 +405,7 @@ public class PensionFundAdministrator extends AccountOwnerDetail{
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+
 
 
 

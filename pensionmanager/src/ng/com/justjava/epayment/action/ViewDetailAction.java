@@ -15,7 +15,7 @@ public class ViewDetailAction extends OnSelectElementBaseAction {
 		// TODO Auto-generated method stub
 		//List list = getSelectedObjects();
 		String name = getCollectionElementView().getModelName();
-		
+		int status = 5;
 		System.out.println(" The Model Name "+getView().getModelName());
 		System.out.println(" All Values == "+getView().getAllValues());
 		
@@ -28,6 +28,8 @@ public class ViewDetailAction extends OnSelectElementBaseAction {
 		if(Is.equalAsStringIgnoreCase(getView().getModelName(), "MonthlyUpload")){
 			Long id = (Long) getView().getAllValues().get("id");
 			lastFilter = " AND ${upload.id}="+id;
+			status = 1;
+			System.out.println(" Inside MonthlyUpload");
 		}
 		
 		if(Is.equalAsString("PensionFundAdministrator", name)){
@@ -80,8 +82,9 @@ public class ViewDetailAction extends OnSelectElementBaseAction {
 		System.out.println("2b Not returning here..........................");
 		getView().setViewName("pfaHolders");
 		System.out.println("2c Not returning here..........................");
-		String condition="${pfa.id}=" + pfaId + " AND ${corporate.id}="+corporate.getId() +lastFilter;
-		System.out.println("2d Not returning here..........................");
+		String condition="${upload.status}=" +status+" AND ${pfa.id}=" + pfaId + " AND "
+				+ "${corporate.id}="+corporate.getId() +lastFilter;
+		System.out.println("See the condition Here......................." + condition);
 		//String condition="${pfa.id}=3 AND ${corporate.id}=1";
 		getView().setValues(key); // 3
 		getView().findObject(); // 4

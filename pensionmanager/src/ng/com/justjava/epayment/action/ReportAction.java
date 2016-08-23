@@ -11,6 +11,7 @@ import ng.com.justjava.epayment.utility.UserManager;
 
 import org.openxava.actions.*;
 import org.openxava.model.MapFacade;
+import org.openxava.util.Is;
 
 
 
@@ -86,24 +87,27 @@ public class ReportAction extends JasperReportBaseAction implements IChangeContr
 	
 	@Override
 	public boolean inNewWindow() {
-			
+
 		boolean result2 = true;
-		if(dataSource.isEmpty()){
-			//addError("No data for the selected parameter");	
+		
+		System.out.println("1 The datasource here ===="+dataSource);
+		
+		if(dataSource==null || dataSource.isEmpty()){
 			result2 = false;
+			System.out.println("2 The datasource here ===="+dataSource);
 		}
 		
+
 		return result2;
 	}
-	
+
 	@Override
-	public String getForwardURI() {	
-		String result2 = "/xava/report.pdf?time="+System.currentTimeMillis();
-		if(dataSource.isEmpty()){
-			//addError("No data for the selected parameter");	
+	public String getForwardURI() {
+		String result2 = "/xava/report.pdf?time=" + System.currentTimeMillis();
+		if(dataSource==null || dataSource.isEmpty()){
 			result2 = null;
-		}
-		
+	}
+
 		return result2;
 	}
 	
@@ -112,37 +116,22 @@ public class ReportAction extends JasperReportBaseAction implements IChangeContr
 	
 		 report = (Report) getView().getValue("report");
 		 format  = (Format)getView().getValue("format");
-		 fromDate  = (Date)getView().getValue("from");
-		 toDate  = (Date)getView().getValue("to");
-		 
+		// fromDate  = (Date)getView().getValue("from");
+		 //  = (Date)getView().getValue("to");
+		 yearKeyValue = (Map)getView().getValue("year");
+		 administratorKeyValue = (Map)getView().getValue("fundAdministrator");
 		 toMonth = (Months)getView().getValue("month");
-		 int toMonthId = (int) toMonth.ordinal();
-		 
-		 //toMonth.toString();
-		 
-		 Corporate corporate = UserManager.getCorporateOfLoginUser(); 
-		//(Map)setView(view);
-		//corporateKeyValue = (Map)getView().getValue("corporate");
-		//Long corporateId = (Long) corporateKeyValue.get("id");
+			if (Is.empty(report)||Is.empty(format)||Is.empty(toMonth)||Is.empty(yearKeyValue)) {
+				addError("Compulsory field must be selected");
+				return;
+			} 
+			int toMonthId = (int) toMonth.ordinal();
+		 Corporate corporate = UserManager.getCorporateOfLoginUser(); 		
 		
 		
-		//PensionFundAdministrator pfa = UserManager.getPFAOfLoginUser();
-		
-		//custodianKeyValue = (Map)getView().getValue("custodian");
-		//Long custodianId = (Long) custodianKeyValue.get("id");
-		
-		
-		administratorKeyValue = (Map)getView().getValue("fundAdministrator");
 		Long pfaId = (Long) administratorKeyValue.get("id");
 			
-		yearKeyValue = (Map)getView().getValue("year");
-		 //category  = (Map)getView().getValue("category");
-		 //System.out.println("ReportName:=="+report+"format Selected===="+format+"FromDate==="+fromDate
-			//	 +"ToDate==="+toDate+"corporate==="+corporateKeyValue);
 		
-		//switch(report){
-		
-			//case RSAHolders:
 				reportName ="rsaCorporate.jrxml";
 				System.out.println("=== RSAHolders === Report Action=="
 						+ dataSource);		
@@ -156,27 +145,12 @@ public class ReportAction extends JasperReportBaseAction implements IChangeContr
 				System.out.println("=== RSAHolders === After Report Action== "
 						+ "Report Action=="+ dataSource);
 				if(dataSource.isEmpty()){
+					//addMessage("No data for the selected parameter");
 					addError("No data for the selected parameter");	
-					//break;
+					//inNewWindow();
 					return;
-					
 				}
 			
-			
-			
-				
-			/*case PFAInstitutions:
-			 * PFACompany
-				reportName = "pfaInstitution.jrxml";
-				System.out.println("====PFAInstitution === Report Action==="+dataSource);
-				//dataSource = PensionFundAdministrator.getPFAForReport(custodianId);
-				System.out.println("=== PFAInstitution === After Report Action== "
-						+ "Report Action=="+ dataSource);
-				if(dataSource!= null)
-					System.out.println(" === PFAInstitution === Report Action Size== "
-							+ "dataSource size=="+ dataSource.size());
-				break;*/
-			//}
 	
 		
 		System.out.println("Test=============");

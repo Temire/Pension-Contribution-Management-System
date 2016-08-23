@@ -24,7 +24,7 @@ import com.etranzact.fundgate.ws.Transaction;
 @Entity
 @Views({@View(members="bank;terminalId;pin"),@View(name="embeded",members="bank;terminalId"),
 	@View(name="balanceEquiry",members="terminalId;display,bankBalance ")})
-@Tab(filter=LoginUserCorporateFilter.class,properties="terminalId,display,bankBalance",baseCondition = "${enable}=1 AND ${corporate.id}=?")
+@Tab(filter=LoginUserCorporateFilter.class,properties="terminalId,display,bankBalance",baseCondition = "${corporate.id}=? AND ${deleted}=0")
 
 public class TransitAccount extends Approvable{
 	
@@ -64,6 +64,19 @@ public class TransitAccount extends Approvable{
 	@ManyToOne
 	@JoinColumn(name = "accountOwnerId")
 	private Corporate corporate;
+	
+	
+	@Column(columnDefinition="tinyint(1) default 0")
+	@Hidden
+	private boolean deleted;
+	
+		
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 	
 	
 	public String getTerminalId() {

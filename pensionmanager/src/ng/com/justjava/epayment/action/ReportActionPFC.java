@@ -11,6 +11,7 @@ import ng.com.justjava.epayment.utility.UserManager;
 
 import org.openxava.actions.*;
 import org.openxava.model.MapFacade;
+import org.openxava.util.Is;
 
 
 
@@ -85,64 +86,81 @@ public class ReportActionPFC extends JasperReportBaseAction implements IChangeCo
 	
 	@Override
 	public boolean inNewWindow() {
-			
+
 		boolean result2 = true;
-		if(dataSource.isEmpty()){
-			//addError("No data for the selected parameter");	
+		
+		System.out.println("1 The datasource here ===="+dataSource);
+		
+		if(dataSource==null || dataSource.isEmpty()){
 			result2 = false;
+			System.out.println("2 The datasource here ===="+dataSource);
 		}
 		
+
 		return result2;
 	}
-	
+
 	@Override
-	public String getForwardURI() {	
-		String result2 = "/xava/report.pdf?time="+System.currentTimeMillis();
-		if(dataSource.isEmpty()){
-			//addError("No data for the selected parameter");	
+	public String getForwardURI() {
+		String result2 = "/xava/report.pdf?time=" + System.currentTimeMillis();
+		if(dataSource==null || dataSource.isEmpty()){
 			result2 = null;
-		}
-		
+	}
+
 		return result2;
 	}
-	
 	
 	public void execute() throws Exception {
 	
 		 report = (Report) getView().getValue("report");
 		 format  = (Format)getView().getValue("format");
-		 fromDate  = (Date)getView().getValue("from");
-		 toDate  = (Date)getView().getValue("to");
-		 
-		 
 		 toMonth = (Months)getView().getValue("month");
+		 
+		 
+		 if (Is.empty(report)||Is.empty(format)||Is.empty(toMonth)) {
+				addError("Compulsory field must be selected");
+				return;
+			} 
+		 
 		 int toMonthId = (int) toMonth.ordinal();
 		 
-		 PensionFundCustodian custodian = UserManager.getPFCOfLoginUser();
 		 
-		// pfa = UserManager.getPFAOfLoginUser();
+		 
+
 		 
 		corporateKeyValue = (Map)getView().getValue("corporate");
-		Long corporateId = (Long) corporateKeyValue.get("id");
+		Long corporateId = 0L;		 
+		if ( corporateKeyValue != null){
+			 corporateId = (Long)corporateKeyValue.get("id");
+		}
+		
 		System.out.println("1 I am here ");
-		//custodianKeyValue = (Map)getView().getValue("custodian");
-		Long custodianId = null;
+		
+		
+
 		System.out.println("2 I am here ");
+		
 		administratorKeyValue = (Map)getView().getValue("fundAdministrator");
-		Long pfaId = (Long) administratorKeyValue.get("id");
+		Long pfaId = 0L;		 
+		if ( administratorKeyValue != null){
+			 pfaId = (Long)administratorKeyValue.get("id");
+		}
+		
+		
 		System.out.println("3 I am here ");	
-		 //category  = (Map)getView().getValue("category");
+		
+		PensionFundCustodian custodian = UserManager.getPFCOfLoginUser();
+		
 		 System.out.println("ReportName:=="+report+"format Selected===="+format+"FromDate==="+fromDate
 				 +"ToDate==="+toDate+"corporate==="+corporateKeyValue);
 		 
-		 //PensionFundAdministrator pfa = UserManager.getPFAOfLoginUser();
-		 //PensionFundCustodian pfc = UserManager.getPFCOfLoginUser();
+		 
 
 		switch(report){
 		
 		
 			case RSAHolders:
-				reportName ="rsa.jrxml";
+				reportName ="rsaholderPFC.jrxml";
 				System.out.println("=== RSAHolders === Report Action=="
 						+ dataSource);				
 				dataSource = RSAHolder.getAllRSAHolders(corporateId,pfaId,custodian.getId(),toMonthId);

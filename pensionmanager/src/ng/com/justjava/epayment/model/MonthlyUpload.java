@@ -29,7 +29,7 @@ import ng.com.justjava.filter.*;
 
 @Tabs({@Tab(properties="month,narration,status",filter=MultiValueFilter.class,
 		baseCondition = "${deleted}=0 AND ${corporate.id}=? AND ${levelReached}=?"),
-		@Tab(name="approve",properties="narration",filter=MultiValueFilter.class,
+		@Tab(name="approve",properties="narration,dateEntered",filter=MultiValueFilter.class,
 		baseCondition = "${status}=1 AND ${corporate.id}=? AND ${levelReached}=?"),
 		@Tab(name="retry",properties="month,narration,status,paymentResponseCode,paymentResponseDescription",
 		baseCondition = "${deleted}=0 AND ${status} NOT IN (0,1,2,3)"),
@@ -259,10 +259,15 @@ public class MonthlyUpload {
 
 		boolean result = false;
 		FundResponse response = null;
+		System.out.println("1 About to call pay");
+		FundRequest request = getBulkFundRequest();
 		try {
-			System.out.println("About to call pay");
-			FundRequest request = getBulkFundRequest();
+			System.out.println("2 About to call pay");
+			
 			response = WebserviceUtil.getPort().process(request);
+			
+			System.out.println("3 About to call pay");
+			
 			this.setPaymentResponseCode(response.getError());
 			this.setPaymentResponseDescription(response.getMessage());
 			this.setPaymentReference(response.getReference());
@@ -272,28 +277,11 @@ public class MonthlyUpload {
 				setStatus(Status.paid);
 				XPersistence.getManager().merge(this);
 
-				List<BulkItem> items = request.getTransaction().getBulkItems().getBulkItem();
-				for (BulkItem item : items) {
-					
-					PaymentLog log = new PaymentLog();
-					log.setAmount(item.getAmount());
-					log.setBeneficiaryAccountName(item.getBeneficiaryName());
-					log.setBeneficiaryAccountNumber(item.getAccountId());
-					log.setDate(Dates.createCurrent());
-					log.setSenderName(request.getTransaction().getSenderName());
-					log.setTerminalID(getPayingAccount()!=null?
-							getPayingAccount().getTerminalId():"NOT AVAILABLE");
-					log.setUniqueId(item.getUniqueId());
-					log.setResponseCode("N");
-					log.setNarration(item.getNarration());
-					log.setUpload(this);
-					XPersistence.getManager().merge(log);
-				}
 				
 			}
 			
 			
-			XPersistence.commit();
+			//XPersistence.commit();
 			System.out.println("After getPofrt to call pay");
 			
 		} catch (Exception e) {
@@ -302,7 +290,37 @@ public class MonthlyUpload {
 			System.out.println(" The exception here at eTranzact call ======"+e);
 			e.printStackTrace();
 		}
-		
+		List<BulkItem> items = request.getTransaction().getBulkItems().getBulkItem();
+		System.out.println("1  Now trying to iterate...........................");
+		for (BulkItem item : items) {
+			System.out.println("Creating PaymentLog for " + item.getUniqueId()+"...........................");
+			PaymentLog log = new PaymentLog();
+			log.setAmount(item.getAmount());
+			log.setBeneficiaryAccountName(item.getBeneficiaryName());
+			log.setBeneficiaryAccountNumber(item.getAccountId());
+			log.setDate(Dates.createCurrent());
+			log.setSenderName(getCorporate().getUniqueIdentifier());
+			
+			System.out.println(" PayingAccount=== "+ getPayingAccount() + " for corporate "
+					+ getCompanyName());
+			
+			log.setTerminalID(getPayingAccount()!=null?
+					getPayingAccount().getTerminalId():"NOT AVAILABLE");
+			log.setUniqueId(item.getUniqueId());
+			log.setOtherReference(response.getOtherReference());
+			log.setReference(response.getReference());
+			log.setResponseDescription(response.getMessage());
+			log.setResponseCode("N"); 
+			log.setNarration(item.getNarration());
+			log.setPayee(getCorporate());
+			log.setBeneficiary(PensionFundAdministrator.findPFAByAccountNumber(item.getAccountId()));
+			log.setUpload(this);
+			System.out.println("About to merge PaymentLog for " + log.getUniqueId()+"...........................");
+			XPersistence.getManager().merge(log);
+			System.out.println("After merge PaymentLog for " + log.getUniqueId()+"...........................");
+						
+		}
+		XPersistence.commit();
         System.out.println("Pay Result Code = "+response.getError());
         System.out.println("Pay Result Message = "+response.getMessage());
         System.out.println("Pay Result Ref = "+response.getReference());
@@ -341,7 +359,7 @@ public class MonthlyUpload {
 
         trans.setReference(getPaymentOtherReference());
         
-        trans.setSenderName(corporate.getName());	
+        trans.setSenderName(corporate.getUniqueIdentifier());	
         
         
         

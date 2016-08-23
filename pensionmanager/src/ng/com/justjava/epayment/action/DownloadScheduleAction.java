@@ -7,6 +7,7 @@ import net.sf.jasperreports.engine.data.*;
 import ng.com.justjava.epayment.model.DownloadSchedule.Format;
 import ng.com.justjava.epayment.model.DownloadSchedule.Months;
 import ng.com.justjava.epayment.model.Payment.Status;
+import ng.com.justjava.epayment.model.PaymentLog;
 import ng.com.justjava.epayment.model.PensionFundAdministrator;
 import ng.com.justjava.epayment.model.RSAHolder;
 import ng.com.justjava.epayment.model.TransitAccount;
@@ -14,6 +15,7 @@ import ng.com.justjava.epayment.utility.UserManager;
 
 import org.apache.commons.collections.*;
 import org.openxava.actions.*;
+import org.openxava.util.*;
 
 
 
@@ -103,50 +105,66 @@ public class DownloadScheduleAction extends JasperReportBaseAction implements IC
 	
 	@Override
 	public boolean inNewWindow() {
-			
+
 		boolean result2 = true;
-		if(dataSource.isEmpty()){
-			//addError("No data for the selected parameter");	
+		
+		System.out.println("1 The datasource here ===="+dataSource);
+		
+		if(dataSource==null || dataSource.isEmpty()){
 			result2 = false;
+			System.out.println("2 The datasource here ===="+dataSource);
 		}
 		
+
 		return result2;
 	}
 	
 	@Override
-	public String getForwardURI() {	
-		String result2 = "/xava/report.pdf?time="+System.currentTimeMillis();
-		if(dataSource.isEmpty()){
-			//addError("No data for the selected parameter");	
+	public String getForwardURI() {
+		String result2 = "/xava/report.pdf?time=" + System.currentTimeMillis();
+		if(dataSource==null || dataSource.isEmpty()){
 			result2 = null;
-		}
-		
+	}
+
 		return result2;
 	}
+	
 	
 	public void execute() throws Exception {
 	
 		// report = (Report) getView().getValue("report");
 		 format  = (Format)getView().getValue("format");
 		 month = (Months)getView().getValue("month");
-		 //toMonth = (Months)getView().getValue("to");
-		 
-		 int monthId = (int) month.ordinal() + 1;
-		// int fromMonthId = 0;
-		 
-		 //System.out.println("Selected month is "+toMonth+"this is d number "+report);
 		 
 		 yearKeyValue = (Map)getView().getValue("year");
-		
-		int yearId = (int) yearKeyValue.get("year");
-		
-							
+
+		 if (Is.empty(format)||Is.empty(month)||Is.empty(yearKeyValue)) {
+				addError("Compulsory field must be selected");
+				return;
+			}
+		 
+		 int monthId = (int) month.ordinal();
+
+									
 		corporateKeyValue = (Map)getView().getValue("corporate");
 		System.out.println("The corporate selected value is "+corporateKeyValue);
-		Long corporateId = 0L;
-		if(corporateKeyValue != null)
-		 corporateId = (Long) corporateKeyValue.get("id");
 		
+		Long corporateId = 0L;
+		if(corporateKeyValue != null){
+		 corporateId = (Long) corporateKeyValue.get("id");}
+		
+		corporateId = (corporateId==null?0:corporateId);
+		
+		yearKeyValue = (Map)getView().getValue("year");
+		System.out.println("The corporate selected value is "+yearKeyValue);
+		
+		Long yearId = 0L;
+		if(yearKeyValue != null){
+		 yearId = (Long) yearKeyValue.get("id");}
+		
+		yearId = (yearId==null?0:yearId);
+		
+
 		System.out.println("the corporateId is "+ corporateId);
 		//custodianKeyValue = (Map)getView().getValue("custodian");
 		//Long custodianId = null;
@@ -157,14 +175,17 @@ public class DownloadScheduleAction extends JasperReportBaseAction implements IC
 		 System.out.println("The pfa id is "+pfa.getId());
 		 
 		 
-				reportName ="rsaholderNew.jrxml";	
-
+				//reportName ="rsaholderNew.jrxml";	
+		 
+				reportName ="schedule.jrxml";	
 				int tempMonth = monthId-1;
 				
 				
 					System.out.println("1 It is after the return");
 					
-					dataSource = RSAHolder.getAllRSAHoldersPFA(corporateId,pfa.getId(),pfa.getCustodian().getId(),monthId);
+					//dataSource = RSAHolder.getAllRSAHoldersPFA(corporateId,pfa.getId(),pfa.getCustodian().getId(),monthId);
+					
+					dataSource = PaymentLog.getPaymentLog2(pfa.getId(),monthId,yearId,corporateId);
 					if(dataSource.isEmpty()){
 						//addMessage("No data for the selected parameter");
 						addError("No data for the selected parameter");	
@@ -173,14 +194,26 @@ public class DownloadScheduleAction extends JasperReportBaseAction implements IC
 					}
 					
 					
-					System.out.println("Troubleshoot  The DataSource ===="+dataSource);
 					
-					RSAHolder getRSA = (RSAHolder)CollectionUtils.get(dataSource, 0);
+					System.out.println("Troubleshoot  The DataSource ===="+dataSource.size());
+					PaymentLog getLog = null;
+					if(dataSource.size()>= 1)
+						getLog = (PaymentLog)CollectionUtils.get(dataSource, 0);
 					
-					
-					System.out.println("Inside the case i got it"+getRSA.getCorporate().getName());
-					TransitAccount getAccount = (TransitAccount)CollectionUtils.get(getRSA.getCorporate().getTransitAccounts(), 0);
-					
+					else{
+						addError("No data for the selected parameter");	
+						//inNewWindow();
+						return;
+					}
+					System.out.println("Inside the case i got it "+getLog.getUpload().getCorporate().getName());
+					TransitAccount getAccount = null;
+					if(getLog != null && !Is.empty(getLog.getUpload().getCorporate().getTransitAccounts()))
+						getAccount = (TransitAccount)CollectionUtils.get(getLog.getUpload().getCorporate().getTransitAccounts(), 0);
+					else{
+						addError("No Transit Account Already Selected");	
+						//inNewWindow();
+						return;						
+					}
 					System.out.println("Inside the accoubt stuff"+getAccount.getBank().getName());
 					if(getAccount.getBank().getName()==null){
 						getAccountName = "null";

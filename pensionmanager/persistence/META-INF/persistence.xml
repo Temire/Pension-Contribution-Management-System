@@ -47,7 +47,7 @@
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.password" value="rashy0207" />
+			<property name="hibernate.connection.password" value="kenny1367" />
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/pensionmanager" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

@@ -19,7 +19,7 @@ import org.openxava.util.*;
 	@Tab(name="pfaView",properties="complainantName,complainantCompany,dateLodge",
 	baseCondition="${visibleToMyPFA}=1 AND ${complainant.pfa.id}=?",filter=LoginUserPFAFilter.class),
 	
-	@Tab(name="viewStatusOfMyComplaint",properties="dateLodge,status,visibleToCompany,visibleToMyPFA",
+	@Tab(name="viewStatusOfMyComplaint",properties="dateLodge,complaint,status,visibleToCompany,visibleToMyPFA",
 	baseCondition="${complainant.user.name}=?",filter=LoginUserFilter.class),
 	
 	@Tab(name="viewMyComplaint",properties="dateLodge,status,visibleToCompany,visibleToMyPFA",

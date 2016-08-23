@@ -15,7 +15,7 @@ import com.openxava.naviox.model.*;
 
 @Entity
 @View(members="approver;level;transaction;universal;Role [role]") 
-@Tab(filter=LoginUserCorporateFilter.class, baseCondition="(${corporate.id} IN ? AND ${deleted}=0)OR (${corporate} IS NULL AND ${deleted}=0)",properties=
+@Tab(filter=LoginUserCorporateFilter.class, baseCondition="(${corporate.id} IN ? AND ${deleted}=0) OR (${corporate} IS NULL AND ${deleted}=0)",properties=
 "role.name,corporate.name,approver,transaction,universal") 
 
 public class Profile {

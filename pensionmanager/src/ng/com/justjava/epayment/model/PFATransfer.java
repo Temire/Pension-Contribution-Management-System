@@ -20,14 +20,14 @@ import org.openxava.util.*;
 	filter=TransferIncomingFilter.class,baseCondition="${status}=1 AND ${pfa.id}=?"),
 	
 	@Tab(name="verifyIncoming",properties="holderName,comment,dateEntered,outgoingPFA",
-	filter=TransferIncomingFilter.class,baseCondition="${status}=0 AND ${pfa.id}=?"),	
+	filter=TransferIncomingFilter.class,baseCondition="${status}=1 AND ${pfa.id}=?"),	
 	
 	@Tab(name="fundTransferEffected",properties="holderName,comment,dateEntered,status",
 	filter=TransferOutgoingingFilter.class,baseCondition="${status}=2 "
 			+ " AND ${outgoing.id}=? "),
 	
 	@Tab(name="approveOutgoing",properties="holderName,comment,dateEntered,incomingPFA",
-	filter=TransferOutgoingingFilter.class,baseCondition="${status}=1 AND ${outgoing.id}=?"),
+	filter=TransferOutgoingingFilter.class,baseCondition="${status}=0 AND ${outgoing.id}=?"),
 	
 	@Tab(name="statusofMyTransfer",properties="comment,dateEntered,incomingPFA,outgoingPFA,status",
 	filter=LoginUserFilter.class,baseCondition=" ${holder.user.name}=?"),

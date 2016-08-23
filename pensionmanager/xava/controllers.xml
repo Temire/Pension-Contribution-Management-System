@@ -483,7 +483,7 @@
 
 		<action name="initializeTrasaction" hidden="true" on-init="true" on-each-request="true"
 			class="ng.com.justjava.epayment.action.InitializeTransactionAction">
-			<use-object name="xava_view" />  Not needed since v4m2
+			<use-object name="xava_view" />  
 		</action>
 	</controller> 
 
@@ -663,12 +663,40 @@
 		</action>
 	</controller>
 	
- 	<controller name="ReportControllerPaymentLog">
-		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPaymentLog"
+	<controller name="ReportControllerPaymentLogPFA">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPaymentLogPFA"
 			mode="detail" keystroke="Control Alt P">
 			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
 		</action>
 	</controller>
+	
+	<controller name="ReportControllerPaymentLogCorporate">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPaymentLogCorporate"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>	
+
+	<controller name="ReportControllerPaymentLogPFC">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPaymentLogPFC"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>
+
+	<controller name="ReportControllerPaymentLogPencomm">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPaymentLogPencomm"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
+		</action>
+	</controller>		
+	
+<!--  	<controller name="ReportControllerPaymentLog">
+		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPaymentLog"
+			mode="detail" keystroke="Control Alt P">
+			<use-object name="xava_view" />  Not needed since v4m2
+		</action>
+	</controller> -->
 	
 	<controller name="ReportControllerPFA">
 		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPFA"
