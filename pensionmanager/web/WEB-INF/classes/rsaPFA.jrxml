@@ -47,24 +47,6 @@
 	</group>
 	<group name="pfa">
 		<groupExpression><![CDATA[$F{pfa.name}]]></groupExpression>
-		<groupHeader>
-			<band height="30">
-				<textField>
-					<reportElement mode="Opaque" x="50" y="0" width="354" height="24" forecolor="#FFFFFF" backcolor="#80806D" uuid="c91e8e80-5c22-4518-93c0-4bca862f4104"/>
-					<textElement>
-						<font fontName="Times New Roman" size="15" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{pfa.name}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement mode="Opaque" x="0" y="1" width="42" height="23" forecolor="#FFFFFF" backcolor="#80806D" uuid="ebe14a59-5528-48a6-8f0e-616c981ae598"/>
-					<textElement>
-						<font fontName="Calibri" size="14" isBold="true"/>
-					</textElement>
-					<text><![CDATA[PFA:]]></text>
-				</staticText>
-			</band>
-		</groupHeader>
 		<groupFooter>
 			<band height="6"/>
 		</groupFooter>
@@ -175,12 +157,26 @@
 	</group>
 	<title>
 		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="6" y="24" width="42" height="23" forecolor="#FFFFFF" backcolor="#80806D" uuid="ebe14a59-5528-48a6-8f0e-616c981ae598"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PFC:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="56" y="23" width="354" height="24" forecolor="#FFFFFF" backcolor="#80806D" uuid="c91e8e80-5c22-4518-93c0-4bca862f4104"/>
+				<textElement>
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pfa.custodian.name}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="490" y="8" width="292" height="36" forecolor="#FFFFFF" backcolor="#808092" uuid="072ad8e3-45ee-4136-b61a-5cbd0e8ce4af"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="24" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{pfa.custodian.name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{pfa.name}]]></textFieldExpression>
 			</textField>
 			<image>
 				<reportElement x="1012" y="5" width="110" height="62" uuid="628b3e8b-7b1a-43c6-8270-5edbf935eb82"/>
@@ -194,7 +190,7 @@
 				<text><![CDATA[Report of RSA HOLDERS]]></text>
 			</staticText>
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="4" y="36" width="157" height="31" uuid="20dc70ce-c488-4657-82a0-5f2d1201f0ec"/>
+				<reportElement x="4" y="59" width="157" height="31" uuid="20dc70ce-c488-4657-82a0-5f2d1201f0ec"/>
 				<textElement>
 					<font fontName="Cambria Math" size="14" isItalic="false"/>
 				</textElement>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="schedule_subreport2" language="groovy" pageWidth="2189" pageHeight="700" columnWidth="2189" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="940febb3-82a8-4c38-8852-810abbd32701">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     agents_collectionitems.`agent_id` AS agents_collectionitems_agent_id,
+     agents_collectionitems.`colectionItem_id` AS agents_collectionitems_colectionItem_id
+FROM
+     `agents_collectionitems` agents_collectionitems]]>
+	</queryString>
+	<field name="firstName" class="java.lang.String"/>
+	<field name="secondName" class="java.lang.String"/>
+	<field name="pencommNumber" class="java.lang.String"/>
+	<field name="holderContribution" class="java.math.BigDecimal"/>
+	<field name="companyContribution" class="java.math.BigDecimal"/>
+	<field name="volutaryEmployee" class="java.math.BigDecimal"/>
+	<field name="volutaryEmployer" class="java.math.BigDecimal"/>
+	<field name="legacyEmployee" class="java.math.BigDecimal"/>
+	<field name="legacyEmployer" class="java.math.BigDecimal"/>
+	<field name="openingEmployeeContribution" class="java.math.BigDecimal"/>
+	<field name="openingEmployerContribution" class="java.math.BigDecimal"/>
+	<field name="pensionAmount" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="212" y="0" width="100" height="20" uuid="4bc84259-9bdc-45d6-be37-498c451383f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="0" width="23" height="20" uuid="bb93d9b7-7703-4892-a651-97e3c58dbab7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[S/N]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="0" width="57" height="20" uuid="ebbc7c01-1941-4951-8522-a5f9fcc08e2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RSA PIN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="915" y="0" width="172" height="20" uuid="b1ad8c4d-0e13-4b39-ac5a-73be975d38e8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Voluntary Employer Contri]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="572" y="0" width="127" height="20" uuid="6dedf17f-c80f-4504-a1d0-8428ab77004b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Company Contribution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="0" width="135" height="20" uuid="2e20f15a-5072-413f-8760-7acf3049f64b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee Contribution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1299" y="0" width="172" height="20" uuid="385a54ca-b289-404f-9731-0d9fdfe333c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Legacy Employer Contribution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1099" y="0" width="184" height="20" uuid="8b095a40-d52c-4786-9edc-6a5d7a981c30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Legacy Employee Contribution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="704" y="0" width="181" height="20" uuid="6cdf1782-6e3b-49b2-aef4-38b55b979e76"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Voluntary Employee Contribution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1968" y="0" width="145" height="20" uuid="d44949bb-659c-4061-8c2e-a83731ece42e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contribution Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1748" y="0" width="187" height="20" uuid="9aaecec7-3c43-4490-b471-b2d0707b2d49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opening Employer Contribution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1508" y="0" width="191" height="20" uuid="e321c4d6-7b7d-4e39-9a82-95cd524805ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opening Employee Contribution]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="187" y="0" width="211" height="20" uuid="bde24ce0-6eec-4e1a-8a9a-23ff4de4c73c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{firstName}+" "+$F{secondName}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="0" width="111" height="20" uuid="7fbad46e-2a1b-48e8-b775-fa3b322201f8"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pencommNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="0" width="23" height="20" uuid="a4db63a0-41f4-42af-a250-07ca4f831441"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="429" y="0" width="125" height="20" uuid="111f9d8e-7f14-41a2-970c-9ffbb59bbcb8"/>
+				<textFieldExpression><![CDATA[$F{holderContribution}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="573" y="0" width="125" height="20" uuid="8898f8f6-bb54-40b6-9256-cc5ecc82ae4b"/>
+				<textFieldExpression><![CDATA[$F{companyContribution}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="732" y="0" width="126" height="20" uuid="44228fcd-7f6c-4e43-8c38-7b655aa60e23"/>
+				<textFieldExpression><![CDATA[$F{volutaryEmployee}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="905" y="0" width="158" height="20" uuid="2fb2bd81-b6da-4a0d-a003-13b413d00ae4"/>
+				<textFieldExpression><![CDATA[$F{volutaryEmployer}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="1091" y="0" width="184" height="20" uuid="4d67cae4-9db9-4607-b44a-7bcc968775c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{legacyEmployee}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="1326" y="2" width="100" height="20" uuid="03d0870e-475e-41ff-8207-8e932c406c11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{legacyEmployer}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="1508" y="0" width="191" height="20" uuid="cc938689-8d14-4e5c-ac8c-405bad42eee4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{openingEmployeeContribution}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="1748" y="2" width="187" height="20" uuid="b87e9462-3a75-4ce8-99b5-a47e0abc89e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{openingEmployerContribution}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;(###0.00)">
+				<reportElement x="1985" y="0" width="100" height="20" uuid="76a72013-c218-4ea4-9c4c-d0d4bf4a6b7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pensionAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

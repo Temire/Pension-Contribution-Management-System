@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_temp" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="acba6fb1-d7d2-4e04-a503-8e088ce4a467">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Applications\\pensionAugust1\\tomcat\\webapps\\pensionmanager\\WEB-INF\\classes\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="upload.month" class="java.lang.Object"/>
+	<field name="upload.uploadYear.year" class="java.lang.Object"/>
+	<field name="amount" class="java.lang.Object"/>
+	<field name="payee.name" class="java.lang.String"/>
+	<field name="beneficiary.name" class="java.lang.String"/>
+	<field name="beneficiary.account.bank.name" class="java.lang.String"/>
+	<field name="holders" class="java.util.Collection"/>
+	<field name="beneficiary.custodian.name" class="java.lang.String"/>
+	<field name="date" class="java.util.Date"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="0" width="595" height="64" forecolor="#66FF66" backcolor="#66FF66" uuid="54478fc6-d60b-41b5-9bd7-707aba9dab82"/>
+				<imageExpression><![CDATA["wood.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="159" y="35" width="200" height="22" forecolor="#FFFFFF" uuid="100e0671-e994-4250-b722-d19b6b1c855b"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Payment Log Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="SubTitle" x="4" y="8" width="284" height="35" forecolor="#CCFF66" uuid="2378b0ea-2c3e-4e5d-85ff-34724a9e933a"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PENCOMM Report"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement mode="Opaque" x="420" y="2" width="134" height="57" uuid="c119f2c2-ca7d-4704-817f-9638f79a0186"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR} + "logo_cscs.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="4" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="2967bf5c-0209-48de-afb2-1339199c0435"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="187" splitType="Stretch">
+			<subreport>
+				<reportElement style="Detail" x="2" y="84" width="552" height="100" uuid="8fdada55-bbc1-4a4c-b477-24d20b921b43"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{holders})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report_temp_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement style="SubTitle" x="38" y="7" width="236" height="24" forecolor="#333333" uuid="97dc3f8d-42c4-486a-a3b7-42c6c98c4f3e"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{beneficiary.custodian.name}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="6" width="36" height="24" forecolor="#99FF66" backcolor="#99FF66" uuid="d07b61fe-558b-40f3-99dc-08f9387febc1"/>
+			</rectangle>
+			<textField>
+				<reportElement mode="Opaque" x="3" y="64" width="124" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="567c97d9-5614-4366-83a2-cc8ff1cc99c1"/>
+				<textElement>
+					<font fontName="Corbel" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Period: "+$F{upload.uploadYear.year}+" "+$F{upload.month}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SubTitle" x="277" y="36" width="263" height="24" forecolor="#333333" uuid="37616daf-23f2-49c6-9b2e-98214636b9c1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Company: "+$F{payee.name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="36" width="26" height="20" forecolor="#000000" backcolor="#66FF66" uuid="373d5ee1-4177-43fe-9bfd-5e0e4e5827d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PFA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="SubTitle" x="36" y="36" width="236" height="24" forecolor="#333333" uuid="369c2c8f-bf58-469b-8563-f2d8f74b2480"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{beneficiary.name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="380" y="64" width="124" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="b8364f33-1715-45a5-a30d-4292f1760f16"/>
+				<textElement>
+					<font fontName="Corbel" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total Amount: "+$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="127" y="64" width="217" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="647f884a-9751-4d0d-b311-80828b972433"/>
+				<textElement>
+					<font fontName="Corbel" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bank Payed: "+$F{beneficiary.account.bank.name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="3" width="555" height="1" uuid="909a268c-fcb2-469f-8a88-df615eaf812f"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="1e4c0f5a-5a51-4b0c-9106-be2abe0451fe"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="440bec81-03f9-4af7-8b33-624cc221f848"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="8ccd1d59-b0b3-4b84-b18c-c2287f2dfab7"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
