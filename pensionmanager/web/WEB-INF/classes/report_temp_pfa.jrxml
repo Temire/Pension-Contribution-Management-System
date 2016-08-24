@@ -21,17 +21,20 @@
 	<field name="date" class="java.util.Date"/>
 	<group name="Group1">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+	</group>
+	<group name="payeeGroup">
+		<groupExpression><![CDATA[$F{payee.name}]]></groupExpression>
 		<groupHeader>
-			<band height="40">
+			<band height="38">
 				<textField>
-					<reportElement style="SubTitle" x="73" y="7" width="236" height="24" forecolor="#333333" uuid="369c2c8f-bf58-469b-8563-f2d8f74b2480"/>
+					<reportElement style="SubTitle" x="71" y="7" width="236" height="24" forecolor="#333333" uuid="369c2c8f-bf58-469b-8563-f2d8f74b2480"/>
 					<textElement>
 						<font size="18" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{payee.name}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="2" y="0" width="59" height="36" forecolor="#000000" backcolor="#66FF66" uuid="373d5ee1-4177-43fe-9bfd-5e0e4e5827d9"/>
+					<reportElement mode="Opaque" x="0" y="0" width="59" height="36" forecolor="#000000" backcolor="#66FF66" uuid="373d5ee1-4177-43fe-9bfd-5e0e4e5827d9"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -40,11 +43,8 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band/>
+			<band height="2"/>
 		</groupFooter>
-	</group>
-	<group name="Group2">
-		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
@@ -87,40 +87,40 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="133" splitType="Stretch">
+		<band height="131" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="28" width="555" height="1" uuid="7dc1cf1e-b3dc-4d7a-a930-013405735eea"/>
+				<reportElement positionType="FixRelativeToBottom" x="-1" y="27" width="555" height="1" uuid="7dc1cf1e-b3dc-4d7a-a930-013405735eea"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<subreport>
-				<reportElement style="Detail" x="1" y="31" width="552" height="100" uuid="8fdada55-bbc1-4a4c-b477-24d20b921b43"/>
+				<reportElement style="Detail" x="2" y="29" width="552" height="100" uuid="8fdada55-bbc1-4a4c-b477-24d20b921b43"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{holders})]]></dataSourceExpression>
 				<subreportExpression><![CDATA["report_temp_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
-				<reportElement mode="Opaque" x="2" y="6" width="124" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="567c97d9-5614-4366-83a2-cc8ff1cc99c1"/>
+				<reportElement mode="Opaque" x="1" y="5" width="124" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="567c97d9-5614-4366-83a2-cc8ff1cc99c1"/>
 				<textElement>
 					<font fontName="Corbel" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Period: "+$F{upload.uploadYear.year}+" "+$F{upload.month}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="555" height="1" uuid="821cc567-cb19-4c69-b4ef-0667c6caba75"/>
+				<reportElement positionType="FixRelativeToBottom" x="-1" y="26" width="555" height="1" uuid="821cc567-cb19-4c69-b4ef-0667c6caba75"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement mode="Opaque" x="309" y="6" width="222" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="b8364f33-1715-45a5-a30d-4292f1760f16"/>
+				<reportElement mode="Opaque" x="308" y="5" width="222" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="b8364f33-1715-45a5-a30d-4292f1760f16"/>
 				<textElement>
 					<font fontName="Corbel" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Total Amount: =N= "+$F{amount}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="126" y="6" width="169" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="647f884a-9751-4d0d-b311-80828b972433"/>
+				<reportElement mode="Opaque" x="125" y="5" width="169" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="647f884a-9751-4d0d-b311-80828b972433"/>
 				<textElement>
 					<font fontName="Corbel" size="10" isBold="true"/>
 				</textElement>
