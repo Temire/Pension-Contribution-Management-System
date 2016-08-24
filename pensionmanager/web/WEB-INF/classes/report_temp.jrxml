@@ -73,7 +73,7 @@
 			<subreport>
 				<reportElement style="Detail" x="2" y="84" width="552" height="100" uuid="8fdada55-bbc1-4a4c-b477-24d20b921b43"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{holders})]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report_temp_subreport1.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["report_temp_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
 				<reportElement style="SubTitle" x="38" y="7" width="236" height="24" forecolor="#333333" uuid="97dc3f8d-42c4-486a-a3b7-42c6c98c4f3e"/>
