@@ -41,7 +41,7 @@ filter=LoginUserCorporateFilter.class,baseCondition = "select e.firstName, e.sec
 
 @Tabs({@Tab(properties="firstName,secondName,pencommNumber,pfa.name,voluntaryDonation,grossPay,"
 		+ "pensionAmount,holderContribution,"
-		+ "upload.month,upload.uploadYear.year",filter=LoginUserCorporateFilter.class,baseCondition = "${corporate.id}=? AND ${deleted=0}"),
+		+ "upload.month,upload.uploadYear.year,upload.status",filter=LoginUserCorporateFilter.class,baseCondition = "${corporate.id}=? AND ${deleted=0}"),
 		
 		@Tab(name="pfaView",properties="firstName,secondName,pencommNumber,pensionAmount,corporate.name,"
 				+ "upload.month,upload.uploadYear.year",
@@ -562,7 +562,7 @@ public class RSAHolder {
 			localUpload.setUploadYear(PeriodYear.findPeriodYearByYear(2016));
 			//localUpload.setUploadYear((PeriodYear)extra);
 
-			
+			localUpload.setMonthlyFigure(true);
 			localUpload.setStatus(Status.New);
 			String reference = RandomStringUtils.randomAlphanumeric(18).toLowerCase();
 			localUpload.setPaymentOtherReference(reference);
@@ -910,7 +910,7 @@ public static Collection<RSAHolder> getAllRSAHoldersCorporate(Long corporateId,L
 		
 		String concat="";
 		if(corporateId!= null || administratorId!=null  || monthId != 0){
-			concat = " WHERE ";
+			concat = " WHERE r.upload.status IN (5) ";
 		}
 		if(corporateId !=null){
 			if(Is.equalAsStringIgnoreCase("WHERE", concat)){
@@ -972,10 +972,10 @@ public static Collection<RSAHolder> getAllRSAHolders(Long corporateId,Long admin
 	Corporate corporate = UserManager.getCorporateOfLoginUser();
 	//MonthlyUpload upload = null;
 	//upload.getMonth();
-	
-	String concat="";
+	String concat=" WHERE r.upload.status IN (5) ";
+	//String concat="";
 	if(corporateId!= null || administratorId!=null || custodianId!=null || monthId != 0){
-		concat = " WHERE ";
+		concat = "WHERE r.upload.status IN (5)";
 	}
 	if(corporateId !=null){
 		if(Is.equalAsStringIgnoreCase("WHERE", concat)){
@@ -1042,7 +1042,7 @@ public static Collection<RSAHolder> getAllRSAHoldersToFrom(Long corporateId,Long
 		//MonthlyUpload upload = null;
 		//upload.getMonth();
 		
-		String concat=" WHERE r.upload.status IN (5,7) ";
+		String concat=" WHERE r.upload.status IN (5) ";
 		if(corporateId !=null){
 			concat = concat + " AND " + "r.corporate.id="+corporateId;
 		}
@@ -1113,7 +1113,7 @@ public static Collection<RSAHolder> getAllRSAHoldersToFrom(Long corporateId,Long
 			Corporate corporate = UserManager.getCorporateOfLoginUser();
 			//MonthlyUpload upload = null;
 			//upload.getMonth();
-			String concat=" WHERE r.upload.status IN (5,7) ";
+			String concat=" WHERE r.upload.status IN (5) ";
 			if(corporateId !=null){
 				concat = concat + " AND " + "r.corporate.id="+corporateId;
 			}
@@ -1125,7 +1125,7 @@ public static Collection<RSAHolder> getAllRSAHoldersToFrom(Long corporateId,Long
 				concat = concat + " AND " + "r.pfa.custodian.id="+custodianId;
 
 			}
-			if(monthId !=0){
+			if(monthId != 0){
 				concat = concat + " AND " + "r.upload.month="+(monthId-1);
 			}
 			

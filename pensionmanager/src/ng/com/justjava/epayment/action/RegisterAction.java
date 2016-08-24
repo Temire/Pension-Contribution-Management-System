@@ -20,13 +20,13 @@ public class RegisterAction extends ViewBaseAction {
 		
 		Map allValues = getView().getAllValues();
 		System.out.println(" All Values ==" + allValues);
-		RSAHolder holder = RSAHolder.findByPencommNumber(getView().getValueString("pencommNumber"));
+		RSAHolder holder = RSAHolder.findByPencommNumber(getView().getValueString("PIN"));
 		
 		System.out.println(" The all values =="+ allValues);
 		
 		
 		if(holder!=null){
-			addError("RSA Holder Already Registered in the System", null);
+			addError("RSA Holder Already Registered in the System");
 			return;
 		}
 		
@@ -36,7 +36,7 @@ public class RegisterAction extends ViewBaseAction {
 		holder = new RSAHolder();
 		holder.setFirstName(getView().getValueString("firstName"));
 		holder.setPfa(pfa);
-		holder.setPencommNumber(getView().getValueString("pencommNumber"));
+		holder.setPencommNumber(getView().getValueString("PIN"));
 		holder.setEmail(getView().getValueString("email"));
 		holder.setSecondName(getView().getValueString("lastName"));
 		holder.setPhoneNumber(getView().getValueString("phoneNumber"));
@@ -100,8 +100,7 @@ public class RegisterAction extends ViewBaseAction {
 		closeDialog();
 		
 		addMessage(
-				"Personal Pension Contribution Created Successfully. Credentials Sent to your mail",
-				null);
+				"Personal Pension Contribution Created Successfully. Credentials Sent to your mail");
 	}
 
 }

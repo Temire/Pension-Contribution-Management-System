@@ -21,7 +21,7 @@ import com.openxava.naviox.model.*;
 	@View(name="approver", members="userDetail;user;profiles"),
 	@View(name="forEdit", members="userDetail;user;profiles")})
  
-@Tabs({@Tab(filter=LoginUserCorporateFilter.class,baseCondition = "${corporate.id}=?"),
+@Tabs({@Tab(filter=LoginUserCorporateFilter.class,baseCondition = "${corporate.id}=? AND ${deleted}=0"),
 	@Tab(name="allUsers",properties="user.givenName,user.familyName,corporate.name")})
 
 public class CorporateUser extends Approver{

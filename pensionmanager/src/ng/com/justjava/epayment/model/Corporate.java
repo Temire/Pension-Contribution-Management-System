@@ -40,12 +40,8 @@ public class Corporate extends AccountOwnerDetail{
 	private int highestApprovalLevel;
 	
 	@ElementCollection
-/*	  @CollectionTable(
-		        name="CompanyItems",
-		        joinColumns=@JoinColumn(name="corporate_id"))*/
 	@ListsProperties({@ListProperties("code,name"),
-		@ListProperties(forViews="myCorporate",value="code,name,enable")})
-	//@ListAction("PFATransfer.change")
+	@ListProperties(forViews="myCorporate",value="code,name,enable")})
 	private Collection<CompanyPayItemCollection> items;
 	
 	
@@ -64,7 +60,7 @@ public class Corporate extends AccountOwnerDetail{
 	@CollectionView("embeded")
 	@ListProperties("terminalId,bank.name,balance")
 	@SaveAction("Account.saveTransit")
-	@Condition("${enable}=1 AND ${corporate.id}=${this.id}")
+	@Condition("${corporate.id}=${this.id}")
 	@ReadOnly(forViews="balanceEquiry")
 	private Collection<TransitAccount> transitAccounts;
 	
@@ -143,7 +139,7 @@ public class Corporate extends AccountOwnerDetail{
 	@SaveAction("CustomSaveAction.saveUser")
 	@EditAction("CorporateUser_.editUser")
 	@NewAction("CorporateUser_.newUser")
-	@Condition("${enable}=1 AND ${corporate.id}=${this.id}") 
+	@Condition("${enable}=1 AND ${deleted}=0 AND ${corporate.id}=${this.id}") 
 	private Collection<CorporateUser> users;
 	
 	  

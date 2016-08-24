@@ -40,6 +40,7 @@ public class DownloadSchedule {
 	@Required
 	private Months month;
 	//depends="fundAdministrator",condition="${fundAdministrator.} = ?",
+	
 	@Required
 	@DescriptionsList(descriptionProperties="name")
 	@NoCreate

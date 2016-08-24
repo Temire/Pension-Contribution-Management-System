@@ -75,7 +75,7 @@ public Long getId() {
 
 	@ReadOnly
 	@OneToMany(mappedBy="pfcView")
-	@ListProperties("name,fullHoldersNumber")
+	@ListProperties("name")
 	@ViewAction("")
 	@RowAction("RowAction2.showDetail")
 	@Condition("${custodian.id}=0")

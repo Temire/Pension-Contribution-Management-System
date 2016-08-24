@@ -28,6 +28,7 @@ public class SendMonthlyUploadForApprovalAction extends ViewBaseAction{
 		Months month = (Months) getView().getValue("month");
 		Boolean monthlyFigure = (Boolean) getView().getValue("monthlyFigure");
 		System.out.println(" upload Year = "+uploadYear);
+		
 		PeriodYear periodYear=(PeriodYear) MapFacade.findEntity("PeriodYear", uploadYear) ;
 		
 		

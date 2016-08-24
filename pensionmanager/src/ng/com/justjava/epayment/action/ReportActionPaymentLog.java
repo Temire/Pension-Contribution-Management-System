@@ -104,30 +104,7 @@ public class ReportActionPaymentLog extends JasperReportBaseAction implements IC
 		 //toMonth.toString();
 		 
 		 Corporate corporate = UserManager.getCorporateOfLoginUser(); 
-		//(Map)setView(view);
-		//corporateKeyValue = (Map)getView().getValue("corporate");
-		//Long corporateId = (Long) corporateKeyValue.get("id");
 		
-		
-		
-		
-		//PensionFundAdministrator pfa = UserManager.getPFAOfLoginUser();
-		
-		//custodianKeyValue = (Map)getView().getValue("custodian");
-		//Long custodianId = (Long) custodianKeyValue.get("id");
-		
-		
-		//administratorKeyValue = (Map)getView().getValue("fundAdministrator");
-		//Long pfaId = (Long) administratorKeyValue.get("id");
-			
-		//yearKeyValue = (Map)getView().getValue("year");
-		 //category  = (Map)getView().getValue("category");
-		 //System.out.println("ReportName:=="+report+"format Selected===="+format+"FromDate==="+fromDate
-			//	 +"ToDate==="+toDate+"corporate==="+corporateKeyValue);
-
-		//switch(report){
-		
-			//case PaymentLog:
 				reportName ="payment_log_report.jrxml";
 				System.out.println("=== PaymentLog === Report Action=="
 						+ dataSource);		
@@ -143,24 +120,7 @@ public class ReportActionPaymentLog extends JasperReportBaseAction implements IC
 				if(dataSource!= null)
 					System.out.println(" === Payment Log === Report Action Size== "
 							+ "dataSource size=="+ dataSource.size());
-				//reportName ="mandates.jrxml";
-				//break;
-			
-			
-			
-				
-			/*case PFAInstitutions:
-			 * PFACompany
-				reportName = "pfaInstitution.jrxml";
-				System.out.println("====PFAInstitution === Report Action==="+dataSource);
-				//dataSource = PensionFundAdministrator.getPFAForReport(custodianId);
-				System.out.println("=== PFAInstitution === After Report Action== "
-						+ "Report Action=="+ dataSource);
-				if(dataSource!= null)
-					System.out.println(" === PFAInstitution === Report Action Size== "
-							+ "dataSource size=="+ dataSource.size());
-				break;*/
-			//}
+	
 	
 		
 		System.out.println("Test=============");

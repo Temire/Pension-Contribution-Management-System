@@ -82,24 +82,27 @@ public class ReportActionPencomm extends JasperReportBaseAction implements IChan
 	
 	@Override
 	public boolean inNewWindow() {
-			
+
 		boolean result2 = true;
-		if(dataSource.isEmpty()){
-			//addError("No data for the selected parameter");	
+		
+		System.out.println("1 The datasource here ===="+dataSource);
+		
+		if(dataSource==null || dataSource.isEmpty()){
 			result2 = false;
+			System.out.println("2 The datasource here ===="+dataSource);
 		}
 		
+
 		return result2;
 	}
-	
+
 	@Override
-	public String getForwardURI() {	
-		String result2 = "/xava/report.pdf?time="+System.currentTimeMillis();
-		if(dataSource.isEmpty()){
-			//addError("No data for the selected parameter");	
+	public String getForwardURI() {
+		String result2 = "/xava/report.pdf?time=" + System.currentTimeMillis();
+		if(dataSource==null || dataSource.isEmpty()){
 			result2 = null;
-		}
-		
+	}
+
 		return result2;
 	}
 	
@@ -131,7 +134,7 @@ public class ReportActionPencomm extends JasperReportBaseAction implements IChan
 		//switch(report){
 		
 			//case RSAHolders:
-				reportName ="rsa.jrxml";
+				reportName ="rsaPencomm.jrxml";
 				System.out.println("=== RSAHolders === Report Action=="
 						+ dataSource);		
 				

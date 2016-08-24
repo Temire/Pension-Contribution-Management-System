@@ -12,9 +12,9 @@ public class PaymentSenderFilter implements IFilter {
 			Corporate corporate = UserManager.getCorporateOfLoginUser();
 			
 
-			String  senderName = corporate==null?" ":corporate.getName();
+			String  senderName = corporate==null?" ":corporate.getUniqueIdentifier();
 			
-			System.out.println("corporate.getName()="+corporate.getName().trim());
+			System.out.println("corporate.getName()="+corporate.getUniqueIdentifier().trim());
 			
 			Object[] r = null;
 			if(o == null){

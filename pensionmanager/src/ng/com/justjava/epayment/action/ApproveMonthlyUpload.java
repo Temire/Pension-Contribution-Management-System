@@ -10,6 +10,7 @@ import ng.com.justjava.epayment.utility.*;
 import org.openxava.actions.*;
 import org.openxava.jpa.*;
 import org.openxava.model.*;
+import org.openxava.util.*;
 
 public class ApproveMonthlyUpload  extends TabBaseAction{
 
@@ -20,28 +21,37 @@ public class ApproveMonthlyUpload  extends TabBaseAction{
 		Map keys = getView().getKeyValues();
 
 		Corporate corporate = UserManager.getCorporateOfLoginUser();
-		
+		System.out.println("0  Reaching line ");
 		Map payingAccountId = (Map) getView().getValue("payingAccount");
-		TransitAccount account = (TransitAccount) MapFacade.findEntity("TransitAccount", payingAccountId);
-		
-
+		System.out.println("1  Reaching line "+payingAccountId);
+		TransitAccount account =  null ;
+		if(!Is.empty(payingAccountId))
+			account = (TransitAccount) MapFacade.findEntity("TransitAccount", payingAccountId);
+		else{
+			addError("You Need To Pick Funding Account", null);
+			return;
+		}
+		System.out.println("2  Reaching line ");
 		if(corporate==null)
 			return;
 		
-
+		System.out.println("3  Reaching line ");
 		MonthlyUpload upload = (MonthlyUpload) MapFacade.findEntity(
 				"MonthlyUpload", keys);
-		
+		 
 		if(account != null){
 			upload.setPayingAccount(account);
 			System.out.println(" The Transit account picked =="+ account.getDisplay());
 		}
-		
+		System.out.println("4  Reaching line ");		
 		if (isReject()) {
 			upload.setStatus(Status.reject);
 			upload.setLevelReached(-1);
 			XPersistence.getManager().merge(upload);
 			addMessage("Transaction Rejected", null);
+	    	getTab().deselectAll();
+	    	getView().refresh();
+			setNextMode(LIST);
 			return;
 		}
 		if (corporate.getHighestApprovalLevel() > upload.getLevelReached()) {

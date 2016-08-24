@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="schedule" language="groovy" pageWidth="2189" pageHeight="700" columnWidth="2149" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dcc492af-9897-4b2a-9571-5e2c6e8eed62">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Applications\\pensionAugust1\\tomcat\\webapps\\pensionmanager\\WEB-INF\\classes\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="amount" class="java.lang.String"/>
+	<field name="upload.corporate.name" class="java.lang.String"/>
+	<field name="upload.month" class="java.lang.String"/>
+	<field name="beneficiary.name" class="java.lang.String"/>
+	<field name="beneficiary.account.bank.name" class="java.lang.String"/>
+	<field name="beneficiary.account.number" class="java.lang.String"/>
+	<field name="beneficiaryAccountName" class="java.lang.String"/>
+	<field name="date" class="java.util.Date"/>
+	<field name="upload.uploadYear.year" class="java.lang.String"/>
+	<field name="upload" class="java.lang.String"/>
+	<field name="holders" class="java.util.List"/>
+	<field name="payee.uniqueIdentifier" class="java.lang.String"/>
+	<field name="beneficiary.uniqueIdentifier" class="java.lang.String"/>
+	<field name="upload.payingAccount.bank.name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="110" height="62" uuid="130767b0-9b1f-4f2e-9856-3c00c5acefdd"/>
+				<imageExpression><![CDATA["logo_cscs.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="574" y="25" width="126" height="20" uuid="7d7607cf-40f4-4780-8ef8-a14dc3aee474"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[For The Month Of:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="25" width="230" height="20" uuid="b87464aa-e0ec-40f3-a217-0a327b8ee31b"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCHEDULE OF CONTRIBUTIONS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="712" y="25" width="120" height="20" uuid="27064144-29db-4288-bff2-f34062b1a6fa"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{upload.month}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="126">
+			<staticText>
+				<reportElement x="411" y="100" width="100" height="20" uuid="6198d5a4-8749-481f-affc-21d5f19070d9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Schedule Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="511" y="41" width="141" height="20" uuid="40cb050a-5e14-4678-8635-7bb6f648649d"/>
+				<textFieldExpression><![CDATA[$F{beneficiary.uniqueIdentifier}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="789" y="81" width="100" height="20" uuid="b93c6be2-162d-481c-ae0b-b1e0b31d3e55"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="411" y="1" width="100" height="20" uuid="866a8737-629b-402c-90a1-d405c53ebb3b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Year Of Contr.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="136" height="20" uuid="6f5a02a7-8a63-439f-9191-19a321a6f0b2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instrument Number:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="511" y="0" width="144" height="20" uuid="cec8584a-b6ca-4b88-aea7-1b7972b6d496"/>
+				<textFieldExpression><![CDATA[$F{upload.uploadYear.year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1032" y="1" width="202" height="20" uuid="9553ff2d-52ad-4db4-8ba5-b098c444eb7a"/>
+				<textFieldExpression><![CDATA[$F{upload.payingAccount.bank.name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="1032" y="80" width="100" height="20" uuid="dd93815b-1db2-42f3-9dea-a9b9975421d4"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="136" height="20" uuid="c0b29fee-f829-47ed-8d75-c6aeba20edf7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name of PFA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="518" y="21" width="134" height="20" uuid="712613db-66ae-43e6-a12d-8fed1ddee84b"/>
+				<textFieldExpression><![CDATA[$F{payee.uniqueIdentifier}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="1" width="144" height="20" uuid="c22c0b9a-da80-4899-a49b-0dff7adb3d12"/>
+				<textFieldExpression><![CDATA[$F{upload.corporate.name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="518" y="101" width="100" height="20" uuid="ffdcf89c-c04d-4be1-b7cd-7466de108dac"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="81" width="136" height="20" uuid="27ed2ad6-c786-4562-bfac-00522e63a232"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Schedule ID:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="157" y="40" width="192" height="20" uuid="1ccba8e1-020d-485c-a146-2ca430a18f9d"/>
+				<textFieldExpression><![CDATA[$F{beneficiary.account.number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="411" y="40" width="100" height="20" uuid="d2c201a2-464b-4a37-90b1-fbeb03e00e55"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PFA CODE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="61" width="118" height="20" uuid="3213139b-3001-4d16-9145-77ef2eb8516b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment mode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="917" y="21" width="100" height="20" uuid="30b3dbb7-4e77-452c-b5d5-a1112491e355"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PFC Bank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="21" width="100" height="20" uuid="a64c1583-f142-4213-9e83-8c454a819294"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employer Code:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="136" height="20" uuid="4d7c68cf-3c6e-4828-8095-1a611bb2be5b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Number:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="60" width="100" height="20" uuid="6b20bd21-7f9a-44fa-9944-054080d94147"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL AMT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="917" y="1" width="100" height="20" uuid="5f15296e-67b3-4cc3-a790-e9be7212d52a"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employer Bank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="21" width="118" height="20" uuid="db689d62-85ff-4717-b27e-6449ca998486"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PFC Sort Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="1" width="118" height="20" uuid="d78d4bd7-ef98-41d4-bad1-c64cc2279ddd"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employer Sort Code:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="136" height="20" uuid="a68a541d-9964-46df-8091-bc6e1e4f7d65"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name of Employer:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="80" width="100" height="20" uuid="9a78bc7f-a369-4c20-9f74-a29a8e7661a2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PFA Free Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="917" y="80" width="100" height="20" uuid="8012a550-34d9-48c4-9dd2-0c39801a1389"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Recieved]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="81" width="118" height="20" uuid="a7654945-afdb-400c-84a9-382a1227074e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Value Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="157" y="21" width="192" height="20" uuid="866e576a-37e2-437a-8b4c-fa3aa78ae514"/>
+				<textFieldExpression><![CDATA[$F{beneficiary.name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1032" y="20" width="202" height="20" uuid="50e5482e-ad63-4040-b48a-e8aa61f8741d"/>
+				<textFieldExpression><![CDATA[$F{beneficiary.account.bank.name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="104" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="100" uuid="abb69595-ef82-4ae3-b9ae-74689a1e30ae"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{holders})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["schedule_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="2" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>

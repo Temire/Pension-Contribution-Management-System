@@ -106,16 +106,14 @@ public class CronJob {
     		System.out.println(" \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     				+ "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Running Payment Status ");
     		
-    		
         	String sql = "FROM PaymentLog p where p.responseCode='N'";
         	List<PaymentLog> logs = XPersistence.getManager().createQuery(sql).
         			setMaxResults(500).getResultList();   
+        	System.out.println(" UpdatePaymentStatus able to load total of  "+logs.size());
         	for (PaymentLog log : logs) {
-        		if(log.updateStatus()){// To be Done upload.updateStatus();
-	        		log.setResponseCode("0");
-	        		XPersistence.getManager().merge(log);
+        		log.setResponseCode(log.updateStatus()?"0":"Q");
+        		XPersistence.getManager().merge(log);
         		
-        		}
 			}
         	XPersistence.commit();
         	XPersistence.getManager().flush();
