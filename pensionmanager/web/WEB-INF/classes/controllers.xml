@@ -400,12 +400,17 @@
 		</action>
 
 	</controller>
+	<controller name="SaveRSAHolderOnly">
+		<action name="save" mode="detail" by-default="if-possible"
+			class="ng.com.justjava.epayment.action.SaveRSAHolderAction" image="save.gif" keystroke="Control S">
+		</action>		
+	</controller>	
 	
 	<controller name="ViewMyRecord">
-		<action name="myRecord" hidden="true" on-init="true"	class="ng.com.justjava.epayment.action.LoadRSAHolderAction"/>
+		<action name="myRecord" hidden="true" on-init="true"	
+		class="ng.com.justjava.epayment.action.LoadRSAHolderAction"/>
 		<action name="save" mode="detail" by-default="if-possible"
-			class="org.openxava.actions.SaveAction" image="save.gif" keystroke="Control S">
-			<set value="false" property="resetAfter" />
+			class="ng.com.justjava.epayment.action.SaveRSAHolderAction" image="save.gif" keystroke="Control S">
 		</action>		
 	</controller>	
 
@@ -691,12 +696,12 @@
 		</action>
 	</controller>		
 	
-<!--  	<controller name="ReportControllerPaymentLog">
+ 	<controller name="ReportControllerPaymentLog">
 		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPaymentLog"
 			mode="detail" keystroke="Control Alt P">
-			<use-object name="xava_view" />  Not needed since v4m2
+			<use-object name="xava_view" />  <!-- Not needed since v4m2 -->
 		</action>
-	</controller> -->
+	</controller>
 	
 	<controller name="ReportControllerPFA">
 		<action name="generateReport" class="ng.com.justjava.epayment.action.ReportActionPFA"

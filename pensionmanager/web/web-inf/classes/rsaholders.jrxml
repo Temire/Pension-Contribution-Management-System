@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rsaholders" pageWidth="1200" pageHeight="700" columnWidth="1160" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8364adcc-29ec-42e4-89ec-7ab2b6bf3193">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="246"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.background.image.properties" value="false,true,1.0,0,0,0,0,0,0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
@@ -11,7 +11,7 @@
 		</queryString>
 	</subDataset>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Applications\\pensionmanager\\tomcat\\webapps\\pensionmanager\\WEB-INF\\classes\\logo_cscs.png"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\Applications\\openxava-4.9.1\\tomcat\webapps\\pensionmanager\\WEB-INF\\classes\\logo_cscs.png"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="userCompany" class="java.lang.String"/>
 	<parameter name="month" class="java.lang.String"/>
@@ -19,25 +19,31 @@
 		<![CDATA[]]>
 	</queryString>
 	<field name="firstName" class="java.lang.String"/>
+	<field name="pensionAmount" class="java.lang.String"/>
 	<field name="pfa.name" class="java.lang.String"/>
 	<field name="email" class="java.lang.String"/>
 	<field name="secondName" class="java.lang.String"/>
 	<field name="pencommNumber" class="java.lang.String"/>
 	<field name="phoneNumber" class="java.lang.String"/>
 	<field name="voluntaryDonation" class="java.lang.String"/>
-	<field name="pensionAmount" class="java.math.BigDecimal"/>
+	<field name="monthlyContribution" class="java.math.BigDecimal"/>
 	<field name="corporate.name" class="java.lang.String"/>
 	<field name="pfa.custodian.name" class="java.lang.String"/>
 	<field name="cummulatedAmount" class="java.math.BigDecimal"/>
 	<field name="companyContribution" class="java.math.BigDecimal"/>
 	<field name="holderContribution" class="java.math.BigDecimal"/>
 	<field name="upload.month" class="java.lang.Object"/>
-	<field name="upload.uploadYear.year" class="java.lang.Object"/>
-	<variable name="pensionAmount_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{pensionAmount}]]></variableExpression>
+	<variable name="cummulatedAmount_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cummulatedAmount}]]></variableExpression>
 	</variable>
-	<variable name="pensionAmount_2" class="java.math.BigDecimal" resetType="Group" resetGroup="corporate" calculation="Sum">
-		<variableExpression><![CDATA[$F{pensionAmount}]]></variableExpression>
+	<variable name="cummulatedAmount_2" class="java.math.BigDecimal" resetType="Group" resetGroup="corporate" calculation="Sum">
+		<variableExpression><![CDATA[$F{cummulatedAmount}]]></variableExpression>
+	</variable>
+	<variable name="monthlyContribution_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{monthlyContribution}]]></variableExpression>
+	</variable>
+	<variable name="monthlyContribution_2" class="java.math.BigDecimal" resetType="Group" resetGroup="corporate" calculation="Sum">
+		<variableExpression><![CDATA[$F{monthlyContribution}]]></variableExpression>
 	</variable>
 	<group name="pfc">
 		<groupExpression><![CDATA[$F{pfa.custodian.name}]]></groupExpression>
@@ -46,7 +52,7 @@
 				<textField>
 					<reportElement mode="Opaque" x="472" y="11" width="288" height="20" forecolor="#FFFFFF" backcolor="#808092" uuid="072ad8e3-45ee-4136-b61a-5cbd0e8ce4af"/>
 					<textElement textAlignment="Right">
-						<font fontName="Times New Roman" size="16" isBold="true"/>
+						<font fontName="Times New Roman" size="15" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{pfa.custodian.name}]]></textFieldExpression>
 				</textField>
@@ -90,7 +96,7 @@
 	<group name="corporate">
 		<groupExpression><![CDATA[$F{corporate.name}]]></groupExpression>
 		<groupHeader>
-			<band height="20">
+			<band height="27">
 				<textField>
 					<reportElement mode="Opaque" x="98" y="0" width="306" height="20" backcolor="#CCCCCC" uuid="7a5f4997-d632-4416-9d6b-a42abfc3e5ab"/>
 					<textElement>
@@ -109,45 +115,28 @@
 		</groupHeader>
 		<groupFooter>
 			<band height="23">
+				<textField pattern="#,##0.00;(#,##0.00)">
+					<reportElement x="801" y="0" width="176" height="20" uuid="c391aff7-2872-4105-8be9-248f88f6160c"/>
+					<textElement>
+						<font fontName="Times New Roman" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{monthlyContribution_2}]]></textFieldExpression>
+				</textField>
 				<staticText>
-					<reportElement x="504" y="3" width="256" height="20" uuid="7be92451-7b87-42d8-9faf-34020dc72643"/>
+					<reportElement x="530" y="2" width="256" height="20" uuid="7be92451-7b87-42d8-9faf-34020dc72643"/>
 					<textElement>
 						<font fontName="Times New Roman" size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Company Monthly Total Contributions:]]></text>
 				</staticText>
-				<textField pattern="#,##0.00;(#,##0.00)">
-					<reportElement x="922" y="0" width="176" height="20" uuid="c391aff7-2872-4105-8be9-248f88f6160c"/>
-					<textElement>
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{pensionAmount_2}]]></textFieldExpression>
-				</textField>
 			</band>
-		</groupFooter>
-	</group>
-	<group name="month">
-		<groupExpression><![CDATA[$F{upload.month}]]></groupExpression>
-		<groupHeader>
-			<band height="30">
-				<textField>
-					<reportElement mode="Opaque" x="472" y="0" width="186" height="20" backcolor="#FFAFAF" uuid="7e91124e-732c-4d6d-9c41-9b8efdbc94e2"/>
-					<textElement>
-						<font fontName="Times New Roman" size="15" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{upload.uploadYear.year}+" "+$F{upload.month}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="6"/>
 		</groupFooter>
 	</group>
 	<title>
 		<band height="84" splitType="Stretch">
 			<image>
 				<reportElement x="1012" y="5" width="110" height="62" uuid="628b3e8b-7b1a-43c6-8270-5edbf935eb82"/>
-				<imageExpression><![CDATA["C:\\Applications\\pensionmanager\\tomcat\\webapps\\pensionmanager\\WEB-INF\\classes\\logo_cscs.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Applications\\openxava-4.9.1\\tomcat\\webapps\\pensionmanager\\WEB-INF\\classes\\logo_cscs.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="492" y="41" width="292" height="31" uuid="43d8d7f1-e022-4412-ab34-5ad6037a1e32"/>
@@ -166,10 +155,6 @@
 			<textField>
 				<reportElement x="372" y="0" width="100" height="20" uuid="ee56c8a4-9049-4036-800f-7a95bc2bb8cb"/>
 				<textFieldExpression><![CDATA[$P{userCompany}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="263" y="4" width="100" height="20" uuid="c79ecd49-db7b-4c5e-b8f7-9f6ccf92a8a4"/>
-				<textFieldExpression><![CDATA[$F{corporate.name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -197,7 +182,7 @@
 				<text><![CDATA[Pension Number]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="939" y="0" width="154" height="20" uuid="b86d7a7b-08a7-47b8-a26d-c7b7a5ee771f"/>
+				<reportElement x="801" y="5" width="154" height="20" uuid="b86d7a7b-08a7-47b8-a26d-c7b7a5ee771f"/>
 				<textElement>
 					<font fontName="Times New Roman" size="16" isBold="true"/>
 				</textElement>
@@ -223,7 +208,13 @@
 				</textElement>
 				<text><![CDATA[Company Contribution]]></text>
 			</staticText>
-			
+			<staticText>
+				<reportElement x="998" y="4" width="100" height="20" uuid="f701e027-e8cd-4209-aa06-9dd671458980"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Month]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -264,30 +255,37 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{holderContribution}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="998" y="0" width="100" height="20" uuid="927c034f-30c1-40cd-a0d8-45a7d5315a5d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{upload.month}]]></textFieldExpression>
+			</textField>
 			<textField pattern="#,##0.00;#,##0.00-">
-				<reportElement mode="Opaque" x="931" y="0" width="155" height="20" backcolor="#FFFFFF" uuid="5db22cd5-c0d7-4614-967c-d3b0f544304f"/>
+				<reportElement mode="Opaque" x="801" y="2" width="155" height="20" backcolor="#FFFFFF" uuid="5db22cd5-c0d7-4614-967c-d3b0f544304f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{pensionAmount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{monthlyContribution}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<summary>
 		<band height="21">
 			<staticText>
-				<reportElement x="616" y="1" width="144" height="20" uuid="8eec8e78-4b53-45cb-becf-ed7e4e5cc6a7"/>
+				<reportElement x="642" y="0" width="144" height="20" uuid="8eec8e78-4b53-45cb-becf-ed7e4e5cc6a7"/>
 				<textElement>
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Contributions:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
-				<reportElement x="922" y="1" width="176" height="20" uuid="e9ddd7a7-599d-40ac-b20e-52df85d4b1e6"/>
+				<reportElement x="801" y="0" width="176" height="20" uuid="e9ddd7a7-599d-40ac-b20e-52df85d4b1e6"/>
 				<textElement>
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{pensionAmount_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{monthlyContribution_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

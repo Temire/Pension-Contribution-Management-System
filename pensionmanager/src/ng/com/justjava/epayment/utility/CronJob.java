@@ -106,7 +106,6 @@ public class CronJob {
     		System.out.println(" \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     				+ "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Running Payment Status ");
     		
-    		 
         	String sql = "FROM PaymentLog p where p.responseCode='N'";
         	List<PaymentLog> logs = XPersistence.getManager().createQuery(sql).
         			setMaxResults(500).getResultList();   
