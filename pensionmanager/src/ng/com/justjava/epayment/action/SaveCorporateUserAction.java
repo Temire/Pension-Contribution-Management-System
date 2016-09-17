@@ -119,15 +119,28 @@ public class SaveCorporateUserAction extends CollectionElementViewBaseAction {
 			user.setRoles(roles);
 			XPersistence.getManager().merge(user);
 		}
-System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n The value to be set===" + userValues);
+System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+		+ "SaveCorporate The value to be set===" + userValues);
 
-SystemWideSetup.sendMail(user.getEmail(), "Notification of User Credentials ", " Your Username is "+
+/*SystemWideSetup.sendMail(user.getEmail(), "Notification of User Credentials ", " Your Username is "+
 		sentName + " and the password is "+ 
-		password + " Please ensure to change your password during first login ");			
-System.out.println(" The Password==" + password + " And the UserName==" + sentName);	
+		password + " Please ensure to change your password during first login ");	
+*/
+
+
 
 		CorporateUser corporateUser = null;
 		try {
+			SystemWideSetup.sendNotification(user.getEmail(), "Notification of User Credentials ", 
+					" Your Username is "+
+							sentName + " and the password is "+ 
+							password + " Please ensure to change your password during first login ",
+							" Your Username is "+
+									sentName + " and the password is "+ 
+									password + " Please ensure to change your password during first login ",
+									user.getPhoneNumber());
+
+			System.out.println(" The Password==" + password + " And the UserName==" + sentName);				
 			corporateUser = (CorporateUser) getCollectionElementView()
 					.getEntity();
 		} catch (ObjectNotFoundException e) {

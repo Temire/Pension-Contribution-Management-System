@@ -60,8 +60,15 @@ public class SaveBillerUserAction extends SaveElementInCollectionAction {
 		user.setPassword(password);
 		user.setRoles(pfaUser);		
 		XPersistence.getManager().merge(user);
-		SystemWideSetup.sendMail(user.getEmail(), "Notification of User Credentials ", " Your Username is "+user.getName() + " and the password is "+ 
-				password + " Please ensure to change your password during first login ");			
+		SystemWideSetup.sendNotification(user.getEmail(), "Notification of User Credentials ", 
+				" Your Username is "+
+						name + " and the password is "+ 
+						password + " Please ensure to change your password during first login ",
+						" Your Username is "+
+								name + " and the password is "+ 
+								password + " Please ensure to change your password during first login ",
+								user.getPhoneNumber());	
+		
 		System.out.println(" After Users email is =====" + user.getEmail()); 
 		
 	} 

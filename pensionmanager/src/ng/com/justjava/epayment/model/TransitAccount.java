@@ -262,7 +262,7 @@ public class TransitAccount extends Approvable{
 		FundResponse result = null;
 		try {
 			result = WebserviceUtil.getPort().process(request);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

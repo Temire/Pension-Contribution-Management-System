@@ -10,6 +10,7 @@ import ng.com.justjava.epayment.model.MonthlyUpload.Status;
 import ng.com.justjava.security.*;
 
 import org.openxava.jpa.*;
+import org.openxava.util.*;
 import org.quartz.*;
 import org.quartz.impl.*;
 
@@ -48,7 +49,7 @@ public class CronJob {
                 .build();        
         
         String startDateStr = "2013-09-27 00:00:00.0";
-        String endDateStr = "2019-09-31 00:00:00.0";
+        String endDateStr = XavaPreferences.getInstance().getXavaProperty("endDate", "2019-09-31 00:00:00.0");
 
   
         
@@ -86,7 +87,7 @@ public class CronJob {
         CronTrigger cronTriggerD = newTrigger()
                 .withIdentity("triggerD", "mailNotification")
                 .startAt(startDate)
-                .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?").withMisfireHandlingInstructionDoNothing())
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 0/30 * * * ?").withMisfireHandlingInstructionDoNothing())
                 .endAt(endDate)
                 .build();        
 
@@ -185,15 +186,20 @@ public class CronJob {
     	public void execute(JobExecutionContext context) throws JobExecutionException {
     		
     		
-    		System.out.println(" \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Running Verification ");
+    		System.out.println(" \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    				+ "\n\n\n\n\n\n\n\n Running MailNotification ");
     		
     		
         	String sql = "from MailManager m where m.sent=0";
         	List<MailManager> mails = XPersistence.getManager().createQuery(sql).
         			setMaxResults(20).getResultList();   
         	for (MailManager mail : mails) {
-        		mail.reSend();
+        		if(mail.reSend()){
+        			mail.setSent(true);
+        			XPersistence.getManager().merge(mail);
+        		}
 			}
+        	XPersistence.commit();
     	}
     }    
 

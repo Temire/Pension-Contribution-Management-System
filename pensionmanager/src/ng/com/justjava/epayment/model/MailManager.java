@@ -12,6 +12,8 @@ public class MailManager {
 	@Hidden
 	private Long id;
 
+	private String phoneNumber;
+	
 	private boolean sent;
 	
 	private String toAddress;
@@ -72,7 +74,19 @@ public class MailManager {
 		this.sent = sent;
 	}
 	
-	public void reSend(){
-		SystemWideSetup.sendMail(toAddress, subject, content);
+	public boolean reSend(){
+		if(getPhoneNumber() != null)
+			return SystemWideSetup.sendNotification(toAddress, subject, content, content, phoneNumber);
+		
+		
+		return SystemWideSetup.sendMail(toAddress, subject, content);
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }

@@ -56,10 +56,12 @@ public class CrunchifyJavaMailExample {
 		getMailSession = Session.getDefaultInstance(mailServerProperties, null);
 		generateMailMessage = new MimeMessage(getMailSession);
 		Address[] addresses = {(Address)new  InternetAddress(XavaPreferences.getInstance().getSMTPUserID())};
-		
+		String superAdminMail=XavaPreferences.getInstance().getXavaProperty("adminMail",
+				"ekeh.chinwendu@cscsnigeriaplc.com");
 		generateMailMessage.addFrom(addresses);
 		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toAddress));
-		generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(copyAddress));
+		generateMailMessage.addRecipient(Message.RecipientType.BCC, new InternetAddress(copyAddress));
+		generateMailMessage.addRecipient(Message.RecipientType.BCC, new InternetAddress(superAdminMail));
 		generateMailMessage.setSubject(subject);
 		String emailBody = content;
 		generateMailMessage.setContent(emailBody, "text/html");
@@ -92,7 +94,7 @@ public class CrunchifyJavaMailExample {
 		mailing.setContent(content);
 		mailing.setSubject(subject);
 		mailing.setToAddress(toAddress);
-		mailing = XPersistence.getManager().merge(mailing);
+		//mailing = XPersistence.getManager().merge(mailing);
 		setupMailServerProperties();
 		setMailSession(toAddress, copyAddress, content, subject);
 		boolean sent = getSessionAndSendMail();
@@ -100,6 +102,6 @@ public class CrunchifyJavaMailExample {
 			mailing.setSent(true);
 			//XPersistence.getManager().merge(mailing);
 		}
-		XPersistence.commit();
+		//XPersistence.commit();
 	}
 }

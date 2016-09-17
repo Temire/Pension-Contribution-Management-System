@@ -1,5 +1,7 @@
 package ng.com.justjava.epayment.model;
 
+import java.util.*;
+
 import javax.persistence.*;
 
 import ng.com.justjava.epayment.action.*;
@@ -15,7 +17,7 @@ import com.openxava.naviox.model.*;
 
 @Entity
 @View(members="approver;level;transaction;universal;Role [role]") 
-@Tab(filter=LoginUserCorporateFilter.class, baseCondition="(${corporate.id} IN ? AND ${deleted}=0) OR (${corporate} IS NULL AND ${deleted}=0)",properties=
+@Tab(filter=LoginUserCorporateFilter.class, baseCondition="(${corporate.id} IN ? AND ${deleted}=0)OR (${corporate} IS NULL AND ${deleted}=0)",properties=
 "role.name,corporate.name,approver,transaction,universal") 
 
 public class Profile {
@@ -117,5 +119,13 @@ public class Profile {
 
 	public void setUniversal(boolean universal) {
 		this.universal = universal;
+	}
+	
+	public Collection<CorporateUser> getUsers(){
+		String ql = "SELECT c FROM CorporateUser c INNER JOIN c.user.roles r WHERE r.name='"+getRole().getName()+"'";
+		Collection<CorporateUser> users = XPersistence.getManager().
+				createQuery(ql).getResultList();
+		return users;
+		
 	}
 }

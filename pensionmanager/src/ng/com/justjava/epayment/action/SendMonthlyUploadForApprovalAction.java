@@ -61,8 +61,10 @@ public class SendMonthlyUploadForApprovalAction extends ViewBaseAction{
 				monthlyUpload.setUploadYear(periodYear);
 				monthlyUpload.setLevelReached(monthlyUpload.getLevelReached()+1);
 				monthlyUpload = XPersistence.getManager().merge(monthlyUpload);
+				monthlyUpload.sendNotification();
 
 			}
+			XPersistence.commit();
 			addMessage((!uploads.isEmpty()?String.valueOf(uploads.size()):" ")+"  " + month + " Upload Sent For Approval", null);
 			getView().refresh();
 		} catch (Exception e) {

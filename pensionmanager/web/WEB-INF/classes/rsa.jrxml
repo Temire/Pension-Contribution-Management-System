@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rsaholders" pageWidth="1200" pageHeight="700" columnWidth="1160" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8364adcc-29ec-42e4-89ec-7ab2b6bf3193">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="246"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.background.image.properties" value="false,true,1.0,0,0,0,0,0,0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
@@ -117,8 +117,8 @@
 					<text><![CDATA[Company Monthly Total Contributions:]]></text>
 				</staticText>
 				<textField pattern="#,##0.00;(#,##0.00)">
-					<reportElement x="911" y="0" width="176" height="20" uuid="c391aff7-2872-4105-8be9-248f88f6160c"/>
-					<textElement textAlignment="Center">
+					<reportElement x="922" y="0" width="176" height="20" uuid="c391aff7-2872-4105-8be9-248f88f6160c"/>
+					<textElement>
 						<font fontName="Times New Roman" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{pensionAmount_2}]]></textFieldExpression>
@@ -129,55 +129,7 @@
 	<group name="month">
 		<groupExpression><![CDATA[$F{upload.month}]]></groupExpression>
 		<groupHeader>
-			<band height="50">
-				<staticText>
-					<reportElement x="510" y="22" width="167" height="20" uuid="b151c924-dc85-4ebf-b9c0-908cc8e95c71"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="14" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Employee Contribution]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="326" y="22" width="130" height="20" uuid="c6c0fd17-3ea9-40f3-8ee6-9063fc89c3f1"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="16" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Pension Number]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="2" y="22" width="39" height="20" uuid="d3697721-3996-4744-989f-c730dab6025c"/>
-					<textElement>
-						<font fontName="Times New Roman" size="16" isBold="true"/>
-					</textElement>
-					<text><![CDATA[S/N]]></text>
-				</staticText>
-				<line>
-					<reportElement x="0" y="46" width="1073" height="1" forecolor="#333333" backcolor="#333333" uuid="9f964f1c-8bf0-405c-96e3-1df3da5091f5"/>
-					<graphicElement>
-						<pen lineStyle="Double"/>
-					</graphicElement>
-				</line>
-				<staticText>
-					<reportElement x="914" y="22" width="154" height="20" uuid="b86d7a7b-08a7-47b8-a26d-c7b7a5ee771f"/>
-					<textElement>
-						<font fontName="Times New Roman" size="16" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Monthly Contribution]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="716" y="22" width="156" height="20" uuid="43feac11-2284-4a25-8c1c-fe46b7987352"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="14" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Company Contribution]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="142" y="22" width="100" height="20" uuid="1a68fe0a-b894-4b75-95ae-47b0e187c1d2"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="16" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Name]]></text>
-				</staticText>
+			<band height="30">
 				<textField>
 					<reportElement mode="Opaque" x="472" y="0" width="186" height="20" backcolor="#FFAFAF" uuid="7e91124e-732c-4d6d-9c41-9b8efdbc94e2"/>
 					<textElement>
@@ -222,12 +174,62 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="27"/>
+		<band height="27">
+			<staticText>
+				<reportElement x="27" y="0" width="100" height="20" uuid="d3697721-3996-4744-989f-c730dab6025c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[S/N]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="0" width="100" height="20" uuid="1a68fe0a-b894-4b75-95ae-47b0e187c1d2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="0" width="130" height="20" uuid="c6c0fd17-3ea9-40f3-8ee6-9063fc89c3f1"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pension Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="939" y="0" width="154" height="20" uuid="b86d7a7b-08a7-47b8-a26d-c7b7a5ee771f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monthly Contribution]]></text>
+			</staticText>
+			<line>
+				<reportElement x="25" y="24" width="1073" height="1" forecolor="#333333" backcolor="#333333" uuid="9f964f1c-8bf0-405c-96e3-1df3da5091f5"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="417" y="0" width="167" height="20" uuid="b151c924-dc85-4ebf-b9c0-908cc8e95c71"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee Contribution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="598" y="0" width="156" height="20" uuid="43feac11-2284-4a25-8c1c-fe46b7987352"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Company Contribution]]></text>
+			</staticText>
+			
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="30">
+		<band height="23">
 			<textField>
-				<reportElement mode="Opaque" x="2" y="5" width="39" height="20" backcolor="#FFFFFF" uuid="1850ad35-b090-4c1a-8ef2-472983ded886"/>
+				<reportElement mode="Opaque" x="27" y="0" width="39" height="20" backcolor="#FFFFFF" uuid="1850ad35-b090-4c1a-8ef2-472983ded886"/>
 				<textElement>
 					<font fontName="Times New Roman" size="14"/>
 					<paragraph tabStopWidth="10"/>
@@ -235,35 +237,35 @@
 				<textFieldExpression><![CDATA[$V{corporate_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="78" y="5" width="225" height="20" backcolor="#FFFFFF" uuid="ba4a5b5f-f546-4466-98bc-e311cd30b53c"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement mode="Opaque" x="66" y="0" width="225" height="20" backcolor="#FFFFFF" uuid="ba4a5b5f-f546-4466-98bc-e311cd30b53c"/>
+				<textElement textAlignment="Right">
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{firstName}+" "+$F{secondName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="312" y="5" width="152" height="20" backcolor="#FFFFFF" uuid="9b05c962-7649-41ac-9727-37f543078fbd"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement mode="Opaque" x="291" y="0" width="152" height="20" backcolor="#FFFFFF" uuid="9b05c962-7649-41ac-9727-37f543078fbd"/>
+				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pencommNumber}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;(#,##0.00)">
-				<reportElement x="709" y="5" width="176" height="20" uuid="27a8a782-8abd-4cf7-99bd-97da53d1a014"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="584" y="0" width="176" height="20" uuid="27a8a782-8abd-4cf7-99bd-97da53d1a014"/>
+				<textElement>
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{companyContribution}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;(#,##0.00)">
-				<reportElement x="519" y="5" width="149" height="20" uuid="c616f1bf-59a7-44ca-b66d-958ca61c3bfb"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="435" y="0" width="149" height="20" uuid="c616f1bf-59a7-44ca-b66d-958ca61c3bfb"/>
+				<textElement>
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{holderContribution}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;#,##0.00-">
-				<reportElement mode="Opaque" x="919" y="3" width="155" height="20" backcolor="#FFFFFF" uuid="5db22cd5-c0d7-4614-967c-d3b0f544304f"/>
+				<reportElement mode="Opaque" x="931" y="0" width="155" height="20" backcolor="#FFFFFF" uuid="5db22cd5-c0d7-4614-967c-d3b0f544304f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
@@ -281,8 +283,8 @@
 				<text><![CDATA[Total Contributions:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
-				<reportElement x="911" y="1" width="176" height="20" uuid="e9ddd7a7-599d-40ac-b20e-52df85d4b1e6"/>
-				<textElement textAlignment="Center">
+				<reportElement x="922" y="1" width="176" height="20" uuid="e9ddd7a7-599d-40ac-b20e-52df85d4b1e6"/>
+				<textElement>
 					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{pensionAmount_1}]]></textFieldExpression>

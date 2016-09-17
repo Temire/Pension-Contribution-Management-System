@@ -307,7 +307,7 @@ public class UserManager {
 	public static CorporateUser getLoginCorporateUser(){
 		CorporateUser corporateUser = null;
 
-		try {
+		try { 
 			String userName = Users.getCurrent();
 			userName = userName!=null?userName.toLowerCase():userName;		
 							

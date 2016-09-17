@@ -31,11 +31,8 @@ public class ApproveMonthlyUpload  extends TabBaseAction{
 			addError("You Need To Pick Funding Account", null);
 			return;
 		}
-		System.out.println("2  Reaching line ");
 		if(corporate==null)
 			return;
-		
-		System.out.println("3  Reaching line ");
 		MonthlyUpload upload = (MonthlyUpload) MapFacade.findEntity(
 				"MonthlyUpload", keys);
 		 
@@ -58,11 +55,13 @@ public class ApproveMonthlyUpload  extends TabBaseAction{
 			upload.setLevelReached(upload.getLevelReached() + 1);
 		} else {
 			upload.setStatus(Status.approve);
-			upload.setPayingAccount(account);
+			//upload.setPayingAccount(account);
 			upload.setLevelReached(-1);
 		}
-		XPersistence.getManager().merge(upload);
-
+		upload = XPersistence.getManager().merge(upload);
+		
+		upload.sendNotification();
+		
     	getTab().deselectAll();
     	getView().refresh();
 		addMessage("Transaction Successfully Approve", null);

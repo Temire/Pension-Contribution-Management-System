@@ -36,6 +36,8 @@ public class ProcessLoadedFile extends ViewBaseAction implements INavigationActi
 		String strResult = "";
 		String modelName = getPreviousView().getModelName() ;
 		
+		
+		Corporate corporate = UserManager.getCorporateOfLoginUser();
 		Months month = (Months) getPreviousView().getValue("month");
 		
 		System.out.println(" The model name around here ==="+modelName);
@@ -52,11 +54,12 @@ public class ProcessLoadedFile extends ViewBaseAction implements INavigationActi
 				if (!Is.emptyString(fileName)) {
 					CSVStrategy strategy = new CSVStrategy(',', '"', '#', true, true);
 					if(fileName.toLowerCase().contains("csv")){
-						file = new File("data/"+modelName.toLowerCase()+ ".csv");
+						file = new File("data/"+fileName+" " + System.currentTimeMillis()+" "+
+								(corporate!=null?corporate.getUniqueIdentifier():corporate)+ ".csv");
 						fi.write(file);	
 						FileInputStream fis = new FileInputStream(file);
 						Reader csvFile = new InputStreamReader(fis);
-
+  
 						ValueProcessorProvider vpp = new ValueProcessorProvider();
 						vpp.registerValueProcessor(Account.class, new AccountValueProcessor());
 						vpp.registerValueProcessor(PayItemCollection.class, new RSAPayItemValueProcessor());

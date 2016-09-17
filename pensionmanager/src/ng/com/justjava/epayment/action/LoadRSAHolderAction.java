@@ -5,6 +5,7 @@ import java.util.*;
 import ng.com.justjava.epayment.model.*;
 import ng.com.justjava.epayment.utility.*;
 
+import org.apache.commons.collections.*;
 import org.openxava.actions.*;
 import org.openxava.jpa.*;
 import org.openxava.util.*;
@@ -17,11 +18,15 @@ public class LoadRSAHolderAction extends ViewBaseAction {
 				String loginName = Users.getCurrent();
 				
 				System.out.println("2 Entering LoadRSAHolderAction " + loginName);
+				Collection<RSAHolder> holders = null;
 				RSAHolder holder = null;
 				try {
-					holder = (RSAHolder) XPersistence.getManager().
-							createQuery(" FROM RSAHolder h WHERE h.email='"+loginName+"'").
-							getSingleResult();
+					holders = (Collection<RSAHolder>) XPersistence.getManager().
+							createQuery(" FROM RSAHolder h WHERE h.email='"+loginName+"' ORDER BY h.upload.id desc").
+							getResultList();
+					if(!holders.isEmpty()){
+						holder = (RSAHolder) CollectionUtils.get(holders, 0);
+					}
 					System.out.println(" The holder here has name ==" + holder.getFirstName());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

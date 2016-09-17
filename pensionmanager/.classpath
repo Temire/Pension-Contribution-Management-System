@@ -36,8 +36,6 @@
 	<classpathentry kind="lib" path="web/WEB-INF/lib/dwr.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/ehcache.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/ejb.jar"/>
-	<classpathentry kind="lib" path="web/WEB-INF/lib/etranzat.jar"/>
-	<classpathentry kind="lib" path="web/WEB-INF/lib/EtranzetJarNetbeans.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/groovy-all.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/guava-14.0-rc1.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/hibernate3.jar"/>
@@ -86,5 +84,6 @@
 	<classpathentry kind="lib" path="web/WEB-INF/lib/vianett_sms_v2_1.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/vt-password-3.1.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/EtranzetJarNetbeans.jar"/>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>

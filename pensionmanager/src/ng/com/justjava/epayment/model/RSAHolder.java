@@ -4,8 +4,6 @@ import java.io.*;
 import java.math.*;
 import java.util.*;
 
-import javafx.collections.*;
-
 import javax.persistence.*;
 
 import ng.com.justjava.epayment.model.MonthlyUpload.Status;
@@ -15,6 +13,7 @@ import ng.com.justjava.filter.*;
 
 import org.apache.commons.collections.*;
 import org.apache.commons.lang3.*;
+import org.hibernate.envers.*;
 import org.hibernate.validator.*;
 import org.openxava.annotations.*;
 import org.openxava.jpa.*;
@@ -32,7 +31,7 @@ import com.openxava.naviox.model.*;
 /*@Tab(properties="firstName,secondName",
 filter=LoginUserCorporateFilter.class,baseCondition = "select e.firstName, e.secondName FROM RSAHolder "
 		+ "e WHERE e.corporate.id=?")*/
-@Views({@View(members="firstName;secondName;email;phoneNumber;pfa;pencommNumber;"
+@Views({@View(members="firstName;secondName;email;phoneNumber;pfa;pencommNumber;voluntaryDonation; "
 		+ " Items {items}"),
 		@View(name="viewOnly", members="firstName;secondName;email;phoneNumber;pencommNumber"),
 		@View(name="extendedViewOnly", members="firstName;secondName;email;phoneNumber;pencommNumber; Items {items}"),
@@ -55,7 +54,7 @@ filter=LoginUserCorporateFilter.class,baseCondition = "select e.firstName, e.sec
 		@Tab(name="pfcView",properties="firstName,secondName,pencommNumber,pfa.name,pensionAmount,"
 				+ "corporate.name,upload.month,upload.uploadYear.year",filter=LoginUserPFCFilter.class,
 				baseCondition = "${pfa.custodian.id}=?")})
-
+@Audited
 public class RSAHolder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -536,31 +535,16 @@ public class RSAHolder {
 	}
 
 	public String saveUpload(Reader csvFile,CSVStrategy strategy,ValueProcessorProvider vpp, Object extra){		
-		String response = "Successfully Uploaded";
+		String response = "Error Loading File: Ensure the CSV file follows the expected format";
 		try {
 			
 			Corporate corporate = UserManager.getCorporateOfLoginUser();
 			MonthlyUpload localUpload = new MonthlyUpload();
-			
-			
-			
-			
-			//Months result = (Months)XPersistence.getManager().
-					//createQuery(" SELECT MAX(m.month) FROM MonthlyUpload m where m.corporate.id="+corporate.getId()).getSingleResult();
-			
-/*			String query = "FROM MonthlyUpload m WHERE m.month="+((Months) extra).ordinal()+"and m.corporate.id="+corporate.getId();
-			System.out.println(" The Query HEre ==="+ query);
-			List uploads = XPersistence.getManager().createQuery(query).getResultList();
-			if(!uploads.isEmpty()){
-				response = "Error: Data for " +((Months) extra)+ " Already Uploaded ";
-				return response;
-			}*/
-			//Corporate corporate = UserManager.getCorporateOfLoginUser();	
+
 			localUpload.setDateEntered(Dates.createCurrent());
 			localUpload.setCorporate(corporate);
 			localUpload.setMonth((Months) extra);
 			localUpload.setUploadYear(PeriodYear.findPeriodYearByYear(2016));
-			//localUpload.setUploadYear((PeriodYear)extra);
 
 			localUpload.setMonthlyFigure(true);
 			localUpload.setStatus(Status.New);
@@ -568,7 +552,6 @@ public class RSAHolder {
 			localUpload.setPaymentOtherReference(reference);
 			localUpload = XPersistence.getManager().merge(localUpload);
 			
-			System.out.println(" The saveUpload called and fired.......................... extra parameter=="+extra);
 
 			CSVReaderBuilder<RSAHolder> builder = new CSVReaderBuilder<RSAHolder>(csvFile);
 
@@ -582,10 +565,15 @@ public class RSAHolder {
 			
 			for (RSAHolder holder : holders) {
 				
-				
+			    System.out.println(" holder.getEmail() ==="+ holder.getEmail());	
+			    System.out.println(" holder.firstName ==="+ holder.getFirstName());
+			    
 				if(holder.getPfa() == null){
 					return "Error: PFA not Set or Not Known To The System for RSA Holder " + holder.getFullName();
-				}
+				} 
+				String pen = (holder.getPencommNumber()!=null?
+						holder.getPencommNumber().replaceAll("\\s+",""):holder.getPencommNumber());
+				holder.setPencommNumber(pen);
 				System.out.println("1 The loaded holder==" + holder.getFirstName());
 				ArrayList<PayItemCollection> innerItems = new ArrayList<PayItemCollection>();
 				System.out.println("2 The loaded holder==" + holder.getSecondName());
@@ -687,11 +675,15 @@ public class RSAHolder {
 				holder = holder.updateRemark();
 				XPersistence.getManager().merge(holder);
 				System.out.println("2 The getMonthlyContribution amount here in upload second time ==="+holder.getMonthlyContribution());
+				response = "Upload Successful";
 			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println(" Error while load is ");
+			response = response + "( "+e.getMessage()+" )";
 			e.printStackTrace();
+			XPersistence.rollback();
 		}
 		return response;
 		
@@ -1243,7 +1235,8 @@ public static Collection<RSAHolder> getAllRSAHoldersToFrom(Long corporateId,Long
 			}
 			if(previousRecord == null){
 				setRemark("New Holder");
-			}else{			
+			}else{		
+				setVoluntaryDonation(previousRecord.getVoluntaryDonation());
 				if(previousRecord.getGrossPay().doubleValue() != getGrossPay().doubleValue() ){
 					
 					setRemark("Gross was "+previousRecord.getGrossPay() +" but "+getGrossPay()+" this month");
@@ -1277,6 +1270,7 @@ public static Collection<RSAHolder> getAllRSAHoldersToFrom(Long corporateId,Long
 	
 	public static RSAHolder findByPencommNumber(String pencommNumber){
 		ArrayList<RSAHolder> holders = null;
+		
 		try {
 			System.out.println(" About to retrieve RSAHolder.......\n");
 			holders = (ArrayList<RSAHolder>) XPersistence.getManager().createQuery("FROM RSAHolder r "

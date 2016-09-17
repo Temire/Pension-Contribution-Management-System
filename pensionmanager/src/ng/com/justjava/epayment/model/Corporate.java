@@ -27,7 +27,7 @@ import com.openxava.naviox.model.*;
 @Tab(properties="name,website,email,address,corporatePhoneNumber",baseCondition="${disabled}=0 AND ${deleted}=0")
 
 public class Corporate extends AccountOwnerDetail{
-	
+	 
 /*	public enum Status{
 		New,Verified,Approved
 	}
@@ -40,8 +40,12 @@ public class Corporate extends AccountOwnerDetail{
 	private int highestApprovalLevel;
 	
 	@ElementCollection
+/*	  @CollectionTable(
+		        name="CompanyItems",
+		        joinColumns=@JoinColumn(name="corporate_id"))*/
 	@ListsProperties({@ListProperties("code,name"),
-	@ListProperties(forViews="myCorporate",value="code,name,enable")})
+		@ListProperties(forViews="myCorporate",value="code,name,enable")})
+	//@ListAction("PFATransfer.change")
 	private Collection<CompanyPayItemCollection> items;
 	
 	

@@ -118,26 +118,27 @@ public class SystemWideSetup {
 		this.emailParameter = emailParameter;
 	}*/
 	
-	public static void sendMail(String toAddress, String subject,String content){
+	public static boolean sendMail(String toAddress, String subject,String content){
+		boolean result = false;
 		try {
 			CrunchifyJavaMailExample.generateAndSendEmail(toAddress, "info@justjava.com.ng", content, subject);
-			
+			result = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			
 			e.printStackTrace();
 		}		
-		
+		return result;
 	}
 
-	public static void sendNotification(String toAddress, String subject,String content,String smsBody,String mobileNo){
-		
+	public static boolean sendNotification(String toAddress, String subject,String content,String smsBody,String mobileNo){
+		boolean result = false;
 		try {
 			sendMail(toAddress, subject, content);
 			String smsUserName = XavaPreferences.getInstance().getXavaProperty("smsUserName", "justjava1");
 			String smsPassword = XavaPreferences.getInstance().getXavaProperty("smsPassword", "changeme1A");
 			Configuration configuration = new Configuration (smsUserName, smsPassword);
-			configuration.setApiUrl("http://oneapi.infobip.com");
+			//configuration.setApiUrl("http://oneapi.infobip.com");
 			SMSClient smsClient = new SMSClient(configuration);
 			
 			
@@ -152,11 +153,14 @@ public class SystemWideSetup {
 			
 			// Store request id because we can later query for the delivery status with it:
 			SendMessageResult sendMessageResult = smsClient.getSMSMessagingClient().sendSMS(smsRequest);
+			
+			System.out.println(" Setting the result to true around here.....");
+			result = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return result;
 		
 	}
 	public String getUrl() {
